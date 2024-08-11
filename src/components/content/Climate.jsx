@@ -100,6 +100,7 @@ const MapChart = () => {
       <Footer bgColor="#E72929" />
       </div>
     </div>
+    
   );
 };
 

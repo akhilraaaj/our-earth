@@ -63,7 +63,7 @@ const QuizForm = () => {
   };
 
   return (
-    <div className="">
+    <div>
       {showResult ? (
         <div>
           <h2 className="text-2xl font-semibold mb-4">Quiz Result</h2>
@@ -73,8 +73,8 @@ const QuizForm = () => {
       ) : (
         <div>
           <h2 className="text-2xl font-semibold mb-4">Question {currentQuestion + 1}</h2>
-          <p className="mb-4">{questions[currentQuestion].question}</p>
-          <div>
+          <p className="text-start mb-4">{questions[currentQuestion].question}</p>
+          <div className='flex flex-col items-start justify-start'>
             {questions[currentQuestion].options.map((option, index) => (
               <div key={index} className="mb-2">
                 <input

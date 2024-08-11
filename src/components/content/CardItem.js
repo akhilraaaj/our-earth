@@ -10,15 +10,15 @@ export const CardItem = ({
   link,
 }) => {
   return (
-  <div className="card w-[22rem]" style={{ boxShadow: '0px 10px 8px #999' }}>
+  <div className="card">
   {imgSrc && (
     <figure>
       <img src={imgSrc} alt={imgAlt} />
     </figure>
   )}
   <div className="px-4 py-6">
-    {title && <h2 className="text-2xl text-[#12486B] font-extrabold mb-4">{title}</h2>}
-    {description && <p className="text-[#00704A] text-xl font-bold">{description}</p>}
+    {title && <h2 className="text-xl text-[#12486B] font-extrabold mb-4">{title}</h2>}
+    {description && <p className="text-[#00704A] text-lg font-bold">{description}</p>}
     {buttonText && link && (
       <div className="flex justify-center mt-6">
         <Link to={link}>
