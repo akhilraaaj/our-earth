@@ -18,11 +18,11 @@ export const Biome = () => {
         'https://images.unsplash.com/photo-1469474968028-56623f02e42e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxuYXR1cmV8ZW58MHwwfHx8MTcyMTA0MjYwMXww&ixlib=rb-4.0.3&q=80&w=1080',
       ]}
     >
-    <section className="grid h-[600px] w-full place-content-center bg-[url('https://image.mux.com/K8QrwDyi02LcDaAA8CLnpILaTUK6Md9ek/thumbnail.jpg?time=0&width=2700&height=1519&fit_mode=smartcrop')] bg-opacity-20 bg-cover bg-center bg-no-repeat">
+    <section className="grid md:h-[600px] h-fit w-full place-content-center bg-[url('https://image.mux.com/K8QrwDyi02LcDaAA8CLnpILaTUK6Md9ek/thumbnail.jpg?time=0&width=2700&height=1519&fit_mode=smartcrop')] bg-opacity-20 bg-cover bg-center bg-no-repeat">
        <div className="flex flex-col justify-start items-start text-start md:w-1/2 w-full mt-20 px-12">
         <h4 className="font-extrabold text-5xl mb-2 text-white">What is a Biome?</h4>
         <p className="font-bold text-lg text-green-300 my-4">A biome is defined as a regional area characterized by the plants, animals, and climate in that area. Many of the plants and animals located in these areas area endemic to the biome. There are five primary biomes in the world:</p>
-        <ul className="font-bold text-lg text-blue-200 list-disc px-4">
+        <ul className="font-bold text-lg text-blue-200 list-disc p-4">
             <li>Grassland</li>
             <li>Desert</li>
             <li>Forest</li>
@@ -35,7 +35,7 @@ export const Biome = () => {
                alt=""
                className="absolute bottom-0 right-0 w-[48%] h-[60%] rounded-tl-3xl md:block hidden"
             />
-            <h5 className="text-lg absolute bottom-3 right-6 font-extrabold text-slate-950">Hover over this section to view different biomes of Earth!!</h5>
+            <h5 className="text-lg absolute bottom-3 right-6 font-extrabold text-slate-950 md:block hidden">Hover over this section to view different biomes of Earth!!</h5>
       </section>
     </MouseImageTrail>
   );
@@ -126,7 +126,7 @@ const MouseImageTrail = ({
   return (
     <div
       ref={scope}
-      className="relative overflow-hidden w-full border rounded-3xl shadow-2xl"
+      className="relative overflow-hidden w-full border rounded-3xl shadow-2xl md:mt-20 mt-6 mb-12"
       onMouseMove={handleMouseMove}
     >
       {children}

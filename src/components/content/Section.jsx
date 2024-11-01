@@ -5,7 +5,7 @@ import Quiz from "./quiz/Quiz";
 import Testimonials from './Testimonials';
 import ecoFriendlyTravel from '../../assets/eco-friendly-travel.png'
 import SectionCardGrid from "./SectionCardGrid";
-import { Biome } from "./SectionImageContainer";
+import { Biome } from "./Biome";
 import DonateEarthCTA from "./Donate";
 
 
