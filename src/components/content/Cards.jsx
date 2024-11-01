@@ -5,31 +5,7 @@ import { Link } from 'react-router-dom';
 
 const CustomButton = () => {
   return (
-    <button
-  class="relative btn btn-wide btn-xl flex items-center px-6 py-3 overflow-hidden font-medium transition-all bg-indigo-500 rounded-md group"
->
-  <span
-    class="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-mr-4 group-hover:-mt-4"
-  >
-    <span
-      class="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-gray-300"
-    ></span>
-  </span>
-  <span
-    class="absolute bottom-0 rotate-180 left-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-ml-4 group-hover:-mb-4"
-  >
-    <span
-      class="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-gray-300"
-    ></span>
-  </span>
-  <span
-    class="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full bg-indigo-600 rounded-md group-hover:translate-x-0"
-  ></span>
-  <span
-    class="relative w-full text-center font-bold text-base text-white transition-colors duration-200 ease-in-out group-hover:text-white"
-    >Learn More</span>
-</button>
-
+    <button class="group relative w-full inline-flex text-lg gap-2 h-12 items-center justify-center rounded-md bg-[#00704A] px-6 text-white font-bold"><span>See More</span><div class="ml-1 -rotate-45 transition-all duration-200 group-hover:rotate-0"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 font-bold"><path d="M8.14645 3.14645C8.34171 2.95118 8.65829 2.95118 8.85355 3.14645L12.8536 7.14645C13.0488 7.34171 13.0488 7.65829 12.8536 7.85355L8.85355 11.8536C8.65829 12.0488 8.34171 12.0488 8.14645 11.8536C7.95118 11.6583 7.95118 11.3417 8.14645 11.1464L11.2929 8H2.5C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H11.2929L8.14645 3.85355C7.95118 3.65829 7.95118 3.34171 8.14645 3.14645Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg></div></button>
   );
 };
 
@@ -39,8 +15,8 @@ export { CustomButton };
 const Cards = () =>{
   return (
     <div className='flex flex-col items-center justify-center bg-white px-12' name="card">
-    <div className='mx-auto text-center flex flex-col items-center justify-center sm:justify-normal md:justify-center px-6 md:px-0 md:max-w-[1300px] xl:w-[1300px] 2xl:w-[1300px] max-w-[1300px]'>
-      <div className='flex flex-col justify-center items-center mx-auto text-center py-4 mt-20'>
+    <div className=' text-center flex flex-col items-center justify-center sm:justify-normal md:justify-center px-6 md:px-0 md:max-w-[1300px] xl:w-[1300px] 2xl:w-[1300px] max-w-[1300px]'>
+      <div className='flex flex-col justify-center items-center  text-center py-4 mt-20'>
         <motion.div 
           variants={fadeIn("up", 0.2)}
           initial="hidden"
@@ -105,7 +81,7 @@ const Cards = () =>{
             <h2 className="card-title text-xl text-[#12486B] font-extrabold mb-4">PLANT TREES</h2>
             <p className='text-[#00704A] text-start text-lg font-bold'>Trees play a vital role in our lives as well as the biodiversity. Let us plant trees and put an end to deforestation.</p>
             <div className="card-actions justify-end">
-              <Link to='home/deforestation' className='flex w-full items-center justify-center'><CustomButton /></Link> 
+              <Link to='/home/deforestation' className='flex w-full items-center justify-center'><CustomButton /></Link> 
             </div>
           </div>
         </div>

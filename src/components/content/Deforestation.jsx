@@ -82,6 +82,7 @@ const Deforestation = () => {
     
   return (
     <div className="w-full h-screen overflow-y-auto bg-green-50">
+      <div className=' text-center flex flex-col px-6 md:px-0 py-4 container mx-auto text-center flex flex-col items-center justify-center sm:justify-normal md:justify-center px-6 md:px-0 md:max-w-[1300px] md:w-11/12 xl:w-[1300px] 2xl:w-[1300px] max-w-[1300px] relative'>
       <section className="relative overflow-hidden bg-gradient-to-b from-green-50 via-transparent to-transparent pb-12 pt-20 sm:pb-16 sm:pt-32 lg:pb-24 xl:pb-32 xl:pt-40">
         <div className="relative z-10">
           <div className="absolute inset-x-0 top-1/2 -z-10 flex -translate-y-1/2 justify-center overflow-hidden [mask-image:radial-gradient(50%_45%_at_50%_55%,white,transparent)]">
@@ -98,8 +99,8 @@ const Deforestation = () => {
             </svg>
           </div>
         </div>
-        <div className="relative z-20 mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
+        <div className="relative z-20  max-w-7xl px-6 lg:px-8">
+          <div className=" max-w-2xl text-center">
             <h1 className="text-6xl font-bold tracking-tight text-gray-900">
               Go Green:
               <span className="text-green-600 ml-2">Green Environment for Life</span>
@@ -112,11 +113,12 @@ const Deforestation = () => {
               </button> 
             </div>
           </div>
-          <div className="relative mx-auto mt-10 max-w-3xl max-h-xl">
+          <div className="relative  mt-10 max-w-3xl max-h-xl">
            <img className="w-full rounded-2xl border border-green-200 shadow-2xl" src="https://c4.wallpaperflare.com/wallpaper/428/376/851/forest-4k-desktop-background-hd-wallpaper-preview.jpg" alt="" />
           </div>
         </div>
       </section>
+      </div>
       <div className='md:px-6 px-4 py-24'>
       <div className='flex md:flex-row flex-col items-center justify-between bg-[#186F65] rounded-2xl shadow-2xl md:px-8 px-4 py-12 md:text-left text-center'>
         <div className='flex flex-col justify-center w-full'>
@@ -133,6 +135,7 @@ const Deforestation = () => {
     </div>
     <button onClick={downloadPDF} className="btn btn-success">Download</button>
     <TreePlantingCalculator />
+
     <Footer bgColor="#00704A" />
     </div>
   );

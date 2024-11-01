@@ -16,6 +16,7 @@ import Loading from './components/content/Loading';
 import BlogList from './components/BlogList';
 import CreatePost from './components/CreatePost';
 import EditPost from './components/EditPost';
+import UserProfile from './components/UserProfile';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -56,6 +57,7 @@ function App() {
                   <Route path="/blog" element={<BlogList />} />
                   <Route path="/create-post" element={<CreatePost user={user} />} />
                   <Route path="/edit/:id" element={<EditPost user={user} />} />
+                  <Route path="/dashboard" element={<UserProfile user={user} />} />
                   <Route path="*" element={<Page404 />} />
                 </Routes>
               </ProtectedRoute>

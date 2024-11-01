@@ -94,7 +94,7 @@ const UserProfile = ({ user }) => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto mt-32 flex justify-between">
+    <div className="max-w-6xl  mt-32 flex justify-between">
       <div className='w-4/12'>
         <h1 className="font-bold mb-6">User Profile</h1>
         <p className="text-xl font-semibold">{user.displayName}</p>

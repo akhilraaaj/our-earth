@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 // bg-[#00704A]
 function Footer({ bgColor }) {
+  const currentYear = new Date().getFullYear();
   return (
     <div className={`flex flex-col items-center justify-center bg-[${bgColor}] py-2`} name="footer">
       <section className='text-center p-6'>
@@ -27,49 +28,7 @@ function Footer({ bgColor }) {
           <Link to='/' className='text-white justify-self-start cursor-pointer no-underline flex items-center '>
             <span className='text-2xl mr-2 md:font-extrabold font-bold'>OUR-EARTH</span><i className="fas fa-globe-americas text-2xl"></i>
           </Link>
-          <small className='text-base md:font-bold font-medium text-white'>Copyright © 2023</small>
-          <div className='flex justify-between items-center md:gap-6 gap-8 text-white text-2xl '>
-            <Link
-              className=''
-              to='https://www.facebook.com/'
-              target='_blank'
-              aria-label='Facebook'
-            >
-              <i className='fab fa-facebook-f' />
-            </Link>
-            <Link
-              className=''
-              to='https://www.instagram.com/'
-              target='_blank'
-              aria-label='Instagram'
-            >
-              <i className='fab fa-instagram' />
-            </Link>
-            <Link
-              className=''
-              to='https://www.youtube.com/'
-              target='_blank'
-              aria-label='Youtube'
-            >
-              <i className='fab fa-youtube' />
-            </Link>
-            <Link
-              className=''
-              to='https://twitter.com/'
-              target='_blank'
-              aria-label='Twitter'
-            >
-              <i className='fab fa-twitter' />
-            </Link>
-            <Link
-              className=''
-              to='https://www.linkedin.com/'
-              target='_blank'
-              aria-label='LinkedIn'
-            >
-              <i className='fab fa-linkedin' />
-            </Link>
-          </div>
+          <small className='text-base md:font-bold font-medium text-white'>Copyright © { currentYear }</small>
         </div>
       </section>
     </div>

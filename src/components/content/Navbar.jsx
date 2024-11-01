@@ -61,7 +61,7 @@ function Navbar({ user, email }) {
             </div>
             <ul tabIndex={0} className="dropdown-content z-[1] w-64 menu px-2 py-3 shadow bg-gray-100 mt-2 rounded-box hidden md:block">
               <li className='mb-4 font-bold text-[#2C7865]'>
-                <span className="">Welcome, {email}!</span>
+                <Link to='/home/dashboard'><span className="">Welcome, {email}!</span></Link>
               </li> 
               <li className='flex justify-center items-end text-center'>
                 <button onClick={handleSignOut} className='btn btn-sm btn-success'>

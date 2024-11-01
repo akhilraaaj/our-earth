@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 const Page404 = () => {
   return (
     <section className="flex w-full dark:text-gray-100 h-screen">
-	<div className="container flex flex-col items-center justify-center px-5 mx-auto my-8">
+	<div className="container flex flex-col items-center justify-center px-5  my-8">
 		<div className="max-w-md text-center">
 			<h2 className="mb-8 font-extrabold text-9xl text-gray-800">404</h2>
 			<p className="text-xl font-extrabold italic md:text-3xl text-red-700 whitespace-nowrap mb-4">Sorry, we couldn't find this page.</p>
