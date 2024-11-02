@@ -109,7 +109,7 @@ const BentoCard = ({ icon: Icon, title, description, bgColor, pattern, className
 
 const SectionCardGrid = () => {
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="container mx-auto py-12">
       <motion.h1
         className="text-5xl font-bold text-center mb-8 text-green-800"
         initial={{ opacity: 0, y: -50 }}
@@ -119,7 +119,7 @@ const SectionCardGrid = () => {
         Nurturing Our Planet
       </motion.h1>
       <motion.p
-        className="text-2xl text-center mb-16 text-green-700"
+        className="text-2xl text-center mb-16 text-green-700 font-semibold"
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.2 }}
@@ -167,7 +167,7 @@ const SectionCardGrid = () => {
               icon={Car}
               title="Green Mobility Revolution"
               description="Redefine your journey: Embrace eco-friendly transportation, from electric vehicles to active commuting. Every sustainable mile contributes to cleaner air and a healthier planet."
-              bgColor="rgba(183, 121, 31, 0.95)"
+              bgColor="rgba(184, 122, 31, 0.95)"
               pattern={BackgroundPatterns.grid}
             />
           </div>
