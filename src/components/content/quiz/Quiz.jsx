@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle, XCircle, ArrowLeft, ArrowRight } from 'lucide-react';
-import toast, { Toaster } from 'react-hot-toast';
+import { CheckCircle, XCircle, ArrowLeft, ArrowRight, Award, Leaf } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import quizEmote from '../../../assets/quiz-emote.png';
+// import EarthTrivia from '/our-earth/src/assets/earth-trivia.jpg'
 
 const QuizForm = () => {
+
   const questions = [
     {
       question: "What is the biggest source of pollution in the world's oceans?",
       options: ["Industrial Waste", "Plastic Pollution", "Oil Spills", "Sewage Disposal"],
-      correctAnswer: "Plastic Pollution"
+      correctAnswer: "Plastic Pollution",
     },
     {
       question: "Which of the following is a renewable energy source?",
       options: ["Coal", "Natural Gas", "Solar Power", "Nuclear Power"],
-      correctAnswer: "Solar Power"
+      correctAnswer: "Solar Power",
     },
     {
       question: "What is the primary cause of deforestation?",
       options: ["Urbanization", "Agriculture", "Logging", "Mining"],
-      correctAnswer: "Agriculture"
+      correctAnswer: "Agriculture",
     }
   ];
 
@@ -29,18 +29,53 @@ const QuizForm = () => {
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
   const [answerStatus, setAnswerStatus] = useState(null);
+  const [isAnimating, setIsAnimating] = useState(false);
 
-  useEffect(() => {
-    if (showResult && score === questions.length) {
+  const triggerConfetti = () => {
+    const count = 200;
+    const defaults = {
+      origin: { y: 0.7 },
+      colors: ['#059669', '#10B981', '#34D399', '#6EE7B7', '#A7F3D0']
+    };
+
+    function fire(particleRatio, opts) {
       confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 }
+        ...defaults,
+        ...opts,
+        particleCount: Math.floor(count * particleRatio)
       });
     }
-  }, [showResult, score]);
+
+    fire(0.25, {
+      spread: 26,
+      startVelocity: 55,
+    });
+
+    fire(0.2, {
+      spread: 60,
+    });
+
+    fire(0.35, {
+      spread: 100,
+      decay: 0.91,
+      scalar: 0.8
+    });
+
+    fire(0.1, {
+      spread: 120,
+      startVelocity: 25,
+      decay: 0.92,
+      scalar: 1.2
+    });
+
+    fire(0.1, {
+      spread: 120,
+      startVelocity: 45,
+    });
+  };
 
   const handleOptionSelect = (option) => {
+    if (isAnimating) return;
     const updatedSelectedOptions = [...selectedOptions];
     updatedSelectedOptions[currentQuestion] = option;
     setSelectedOptions(updatedSelectedOptions);
@@ -48,19 +83,15 @@ const QuizForm = () => {
   };
 
   const handleNextQuestion = () => {
-    if (!selectedOptions[currentQuestion]) {
-      toast.error('Please choose an option to continue', { position: "top-center" });
-      return;
-    }
+    if (isAnimating) return;
+    if (!selectedOptions[currentQuestion]) return;
 
+    setIsAnimating(true);
     const isCorrect = selectedOptions[currentQuestion] === questions[currentQuestion].correctAnswer;
     setAnswerStatus(isCorrect);
 
     if (isCorrect) {
       setScore(score + 1);
-      toast.success('Correct answer!', { position: "top-center" });
-    } else {
-      toast.error('Incorrect answer. Try again!', { position: "top-center" });
     }
 
     setTimeout(() => {
@@ -69,12 +100,16 @@ const QuizForm = () => {
         setAnswerStatus(null);
       } else {
         setShowResult(true);
+        if (score + (isCorrect ? 1 : 0) === questions.length) {
+          setTimeout(triggerConfetti, 500);
+        }
       }
+      setIsAnimating(false);
     }, 1000);
   };
 
   const handlePreviousQuestion = () => {
-    if (currentQuestion > 0) {
+    if (currentQuestion > 0 && !isAnimating) {
       setCurrentQuestion(currentQuestion - 1);
       setAnswerStatus(null);
     }
@@ -88,105 +123,179 @@ const QuizForm = () => {
     setAnswerStatus(null);
   };
 
+  const progressPercentage = ((currentQuestion + 1) / questions.length) * 100;
+
   return (
-    <div className="py-24 w-full">
-        <h2 className="text-3xl font-['helvetica'] font-bold mb-8">Earth Conservation Quiz</h2>
-       
-        <div className="h-[500px] mx-auto p-6 bg-gradient-to-r from-green-400 to-blue-500 rounded-xl shadow-2xl">
-          <Toaster />
+      <div className={`w-full mx-auto bg-white py-12 mt-20 sm:px-0 px-4 transition-all duration-700`}>
+        <motion.div 
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className="text-center mb-12"
+        >
+          <div className="flex flex-col items-center justify-center mb-4">
+            <div className="inline-block px-3 py-2 text-sm font-semibold text-white rounded-lg text-cn bg-blue-900 hover:cursor-pointer hover:bg-opacity-90">
+              Conservation Trivia
+            </div>
+            <motion.h1
+              className="text-5xl font-bold text-center mt-4 mb-8 text-green-800"
+              initial={{ opacity: 0, y: -50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+            >
+              Test your knowledge
+            </motion.h1>
+            <motion.p
+              className="text-2xl text-center text-green-700 font-semibold"
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+            >
+              Think Green: Take the Quiz to Discover Your Conservation IQ!
+            </motion.p>
+          </div>
+          
+        </motion.div>
+
+        <div className="bg-[#00704A] backdrop-blur-lg rounded-2xl p-8 h-[748.8px] shadow-xl">
           <AnimatePresence mode="wait">
             {showResult ? (
+              <div className='flex flex-col items-center justify-center w-full h-full'>
               <motion.div
                 key="result"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                className="text-center text-white"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                className="text-center"
               >
-                <h2 className="text-3xl font-bold mb-4">Quiz Result</h2>
-                <p className="text-xl mb-4">You scored {score} out of {questions.length}</p>
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.2, type: "spring" }}
+                  className="mb-8"
+                >
+                  <Award className="w-24 h-24 mx-auto text-yellow-400" />
+                </motion.div>
+                <h2 className="text-3xl font-bold text-white mb-6">Quiz Complete!</h2>
+                <div className="text-xl text-white mb-8">
+                  You scored <span className="text-emerald-400 font-bold">{score}</span> out of {questions.length}
+                </div>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={resetQuiz}
-                  className="bg-yellow-400 text-gray-800 px-6 py-3 rounded-full font-semibold text-lg shadow-md hover:bg-yellow-300 transition duration-300"
+                  className="bg-gradient-to-r from-emerald-400 to-green-400 text-white px-8 py-3 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
                 >
-                  Retry Quiz
+                  Try Again
                 </motion.button>
               </motion.div>
+              </div>
             ) : (
               <motion.div
                 key="question"
-                initial={{ opacity: 0, x: 100 }}
+                initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -100 }}
-                className="text-white"
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
               >
-                <h2 className="text-3xl font-bold mb-4">Question {currentQuestion + 1}</h2>
-                <p className="text-xl mb-8">{questions[currentQuestion].question}</p>
-                <div className='flex items-center justify-between'>
-                  <div className="space-y-4 sm:w-[75%] w-full">
-                    {questions[currentQuestion].options.map((option, index) => (
-                      <motion.div
-                        key={index}
-                        whileHover={{ scale: 1.03 }}
-                        whileTap={{ scale: 0.97 }}
-                      >
-                        <label className="flex items-center space-x-3 p-3 bg-white bg-opacity-20 rounded-lg cursor-pointer hover:bg-opacity-30 transition duration-300">
-                          <input
-                            type="radio"
-                            className="form-radio h-5 w-5 text-yellow-400"
-                            name="option"
-                            value={option}
-                            checked={selectedOptions[currentQuestion] === option}
-                            onChange={() => handleOptionSelect(option)}
-                          />
-                          <span className="text-lg font-medium">{option}</span>
-                        </label>
-                      </motion.div>
-                    ))}
-                  </div>
-                  <img src={quizEmote} alt='Quiz Emote' className='size-[250px] sm:block hidden' />
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mb-6 rounded-xl overflow-hidden"
+                >
+                  <img
+                    src="https://optimise2.assets-servd.host/nice-serious/production/images/ikea-marvellous-middle-10.png?w=1280&q=100&auto=format&fit=crop&dm=1659446362&s=85ce5df0d755711d8a5e16ee05cc38cd"
+                    alt="Question illustration"
+                    className="w-full h-80 object-cover object-center -mb-32"
+                  />
+                  
+                </motion.div>
+                <div className="w-full bg-white/10 rounded-full h-2 mb-8">
+                  <motion.div
+                    className="h-full bg-gradient-to-r from-sky-400 to-blue-400 rounded-full"
+                    initial={{ width: 0 }}
+                    animate={{ width: `${progressPercentage}%` }}
+                    transition={{ duration: 0.5 }}
+                  />
                 </div>
+                <h2 className="text-2xl font-semibold text-white mb-6">
+                  {questions[currentQuestion].question}
+                </h2>
+
+                <div className="space-y-4">
+                  {questions[currentQuestion].options.map((option, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={() => handleOptionSelect(option)}
+                        className={`w-full p-4 rounded-xl text-left transition-all duration-200 ${
+                          selectedOptions[currentQuestion] === option
+                            ? 'bg-white/20 border-2 border-green-400'
+                            : 'bg-white/10 border-2 border-transparent'
+                        } hover:bg-white/20`}
+                      >
+                        <div className="flex items-center space-x-3">
+                          <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
+                            selectedOptions[currentQuestion] === option
+                              ? 'border-green-400'
+                              : 'border-white/50'
+                          }`}>
+                            {selectedOptions[currentQuestion] === option && (
+                              <motion.div
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                className="w-3 h-3 bg-green-400 rounded-full"
+                              />
+                            )}
+                          </div>
+                          <span className="text-white text-lg">{option}</span>
+                        </div>
+                      </motion.button>
+                    </motion.div>
+                  ))}
+                </div>
+
                 <div className="flex justify-between mt-8">
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={handlePreviousQuestion}
-                    className="flex items-center space-x-2 bg-white bg-opacity-20 text-white px-4 py-2 rounded-full"
                     disabled={currentQuestion === 0}
+                    className={`flex items-center space-x-2 px-6 py-2 rounded-full ${
+                      currentQuestion === 0
+                        ? 'bg-white/10 text-white/50 cursor-not-allowed'
+                        : 'bg-white/20 text-white hover:bg-white/30'
+                    }`}
                   >
-                    <ArrowLeft size={20} />
+                    <ArrowLeft className="w-5 h-5" />
                     <span>Previous</span>
                   </motion.button>
+
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={handleNextQuestion}
-                    className="flex items-center space-x-2 bg-yellow-400 text-gray-800 px-4 py-2 rounded-full font-semibold"
+                    disabled={!selectedOptions[currentQuestion]}
+                    className={`flex items-center space-x-2 px-6 py-2 rounded-full ${
+                      !selectedOptions[currentQuestion]
+                        ? 'bg-white/10 text-white/50 cursor-not-allowed'
+                        : 'bg-gradient-to-r from-emerald-400 to-green-400 text-white'
+                    }`}
                   >
                     <span>{currentQuestion === questions.length - 1 ? "Finish" : "Next"}</span>
-                    <ArrowRight size={20} />
+                    <ArrowRight className="w-5 h-5" />
                   </motion.button>
                 </div>
-                {answerStatus !== null && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="mt-4 flex justify-center"
-                  >
-                    {answerStatus ? (
-                      <CheckCircle className="text-green-400" size={40} />
-                    ) : (
-                      <XCircle className="text-red-400" size={40} />
-                    )}
-                  </motion.div>
-                )}
               </motion.div>
             )}
           </AnimatePresence>
         </div>
-    </div>
+      </div>
   );
 };
 
