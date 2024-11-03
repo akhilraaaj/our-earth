@@ -31,7 +31,7 @@ const TestimonialCard = ({ testimonial }) => (
   </div>
 );
 
-const MarqueeRow = ({ testimonials }) => {
+const MarqueeRow = ({ testimonials, reverse = false }) => {
   const [isPaused, setIsPaused] = useState(false);
   const marqueeRef = useRef(null);
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -43,13 +43,33 @@ const MarqueeRow = ({ testimonials }) => {
     let animationFrameId;
     let start = performance.now();
     const speed = 50; // Pixels per second
+    
+    // Set initial position for reverse direction
+    if (reverse && scrollPosition === 0) {
+      setScrollPosition(-(marquee.scrollWidth / 2));
+    }
 
     const animate = (timestamp) => {
       if (!isPaused) {
         const elapsed = timestamp - start;
-        const position = (scrollPosition - (elapsed * speed) / 1000) % (marquee.scrollWidth / 2);
-        setScrollPosition(position);
-        marquee.style.transform = `translateX(${position}px)`;
+        const direction = reverse ? 1 : -1;
+        let newPosition = scrollPosition + (elapsed * speed * direction) / 1000;
+        
+        // Reset position when reaching the end
+        if (reverse) {
+          if (newPosition >= 0) {
+            newPosition = -(marquee.scrollWidth / 2);
+            start = timestamp;
+          }
+        } else {
+          if (newPosition <= -(marquee.scrollWidth / 2)) {
+            newPosition = 0;
+            start = timestamp;
+          }
+        }
+        
+        setScrollPosition(newPosition);
+        marquee.style.transform = `translateX(${newPosition}px)`;
       }
       animationFrameId = requestAnimationFrame(animate);
     };
@@ -59,7 +79,7 @@ const MarqueeRow = ({ testimonials }) => {
     return () => {
       cancelAnimationFrame(animationFrameId);
     };
-  }, [isPaused, scrollPosition]);
+  }, [isPaused, scrollPosition, reverse]);
 
   const handleMouseEnter = () => {
     setIsPaused(true);
@@ -223,7 +243,7 @@ const Testimonials = () => {
 
         <div className="grid grid-cols-1 relative">
           <MarqueeRow testimonials={row1} />
-          <MarqueeRow testimonials={row2} />
+          <MarqueeRow testimonials={row2} reverse={true} />
           <MarqueeRow testimonials={row3} />
         </div>
       </div>
