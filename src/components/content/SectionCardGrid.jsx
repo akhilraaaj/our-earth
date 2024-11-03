@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Leaf, Droplets, Recycle, Bird, Car, Sun } from 'lucide-react';
 
-// Custom SVG Patterns with increased opacity
+// Background patterns remain the same
 const BackgroundPatterns = {
   circular: (
     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -61,14 +61,40 @@ const BackgroundPatterns = {
 };
 
 const BentoCard = ({ icon: Icon, title, description, bgColor, pattern, className }) => {
+  const cardVariants = {
+    initial: {
+      scale: 1,
+      boxShadow: '0 0 0 rgba(0,0,0,0)'
+    },
+    hover: {
+      scale: 1.03,
+      boxShadow: '0 10px 30px rgba(0,0,0,0.2)'
+    }
+  };
+
+  const iconContainerVariants = {
+    initial: {
+      rotate: 0,
+      scale: 1
+    },
+    hover: {
+      rotate: 360,
+      scale: 1.1,
+      transition: {
+        type: 'spring',
+        stiffness: 300,
+        damping: 15
+      }
+    }
+  };
+
   return (
     <motion.div
       className={`relative p-6 rounded-xl h-full flex flex-col overflow-hidden backdrop-blur-sm ${className}`}
       style={{ backgroundColor: bgColor }}
-      whileHover={{ 
-        scale: 1.03,
-        boxShadow: '0 10px 30px rgba(0,0,0,0.2)'
-      }}
+      initial="initial"
+      whileHover="hover"
+      variants={cardVariants}
       transition={{ 
         type: 'spring',
         stiffness: 300,
@@ -81,21 +107,12 @@ const BentoCard = ({ icon: Icon, title, description, bgColor, pattern, className
       <div className="relative z-10">
         <motion.div
           className="w-12 h-12 mb-4 flex items-center justify-center bg-white bg-opacity-20 rounded-lg"
-          whileHover={{ 
-            rotate: 360,
-            scale: 1.1,
-          }}
-          transition={{ 
-            type: 'spring',
-            stiffness: 300,
-            damping: 15
-          }}
+          variants={iconContainerVariants}
         >
           <Icon className="w-6 h-6 text-white" />
         </motion.div>
         <motion.h3 
           className="text-2xl font-bold text-white mb-3"
-          whileHover={{ scale: 1.05 }}
         >
           {title}
         </motion.h3>
@@ -110,6 +127,9 @@ const BentoCard = ({ icon: Icon, title, description, bgColor, pattern, className
 const SectionCardGrid = () => {
   return (
     <div className="container mx-auto py-12">
+      <div className="inline-block px-3 py-2 mb-6 text-sm font-semibold text-white rounded-lg text-cn bg-blue-900 hover:cursor-pointer hover:bg-opacity-90">
+          Eco-Friendly Choices
+      </div>
       <motion.h1
         className="text-5xl font-bold text-center mb-8 text-green-800"
         initial={{ opacity: 0, y: -50 }}
@@ -167,7 +187,7 @@ const SectionCardGrid = () => {
               icon={Car}
               title="Green Mobility Revolution"
               description="Redefine your journey: Embrace eco-friendly transportation, from electric vehicles to active commuting. Every sustainable mile contributes to cleaner air and a healthier planet."
-              bgColor="rgba(184, 122, 31, 0.95)"
+              bgColor="#508D4E"
               pattern={BackgroundPatterns.grid}
             />
           </div>
