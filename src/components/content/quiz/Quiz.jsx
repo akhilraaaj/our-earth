@@ -21,8 +21,44 @@ const QuizForm = () => {
       question: "What is the primary cause of deforestation?",
       options: ["Urbanization", "Agriculture", "Logging", "Mining"],
       correctAnswer: "Agriculture",
+    },
+    {
+      question: "Which gas is most responsible for global warming?",
+      options: ["Methane", "Nitrogen", "Carbon Dioxide", "Oxygen"],
+      correctAnswer: "Carbon Dioxide",
+    },
+    {
+      question: "What is the main goal of conservation efforts?",
+      options: ["Preserving natural resources", "Increasing industrial production", "Maximizing agricultural land", "Expanding urban areas"],
+      correctAnswer: "Preserving natural resources",
+    },
+    {
+      question: "Which of these animals is critically endangered due to deforestation?",
+      options: ["Polar Bear", "Orangutan", "Penguin", "Dolphin"],
+      correctAnswer: "Orangutan",
+    },
+    {
+      question: "What is one major consequence of ocean acidification?",
+      options: ["Increased ocean temperature", "Coral bleaching", "More oxygen in the water", "Increased fish populations"],
+      correctAnswer: "Coral bleaching",
+    },
+    {
+      question: "What practice can reduce soil erosion in farming?",
+      options: ["Overgrazing", "Crop rotation", "Pesticide use", "Deforestation"],
+      correctAnswer: "Crop rotation",
+    },
+    {
+      question: "Which of the following helps in reducing carbon footprint?",
+      options: ["Using public transportation", "Using single-use plastic", "Leaving lights on", "Using fossil fuels"],
+      correctAnswer: "Using public transportation",
+    },
+    {
+      question: "Which action can best support biodiversity conservation?",
+      options: ["Creating more wildlife reserves", "Clearing forests for farmland", "Building more factories", "Draining wetlands"],
+      correctAnswer: "Creating more wildlife reserves",
     }
   ];
+
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState(new Array(questions.length).fill(''));
@@ -100,7 +136,7 @@ const QuizForm = () => {
         setAnswerStatus(null);
       } else {
         setShowResult(true);
-        if (score + (isCorrect ? 1 : 0) === questions.length) {
+        if (score + (isCorrect ? 1 : 0) > 2) {
           setTimeout(triggerConfetti, 500);
         }
       }
