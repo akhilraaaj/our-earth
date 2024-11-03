@@ -1,5 +1,6 @@
 import { useAnimate } from "framer-motion";
 import React, { useRef } from "react";
+import Arrow from '/our-earth/src/assets/arrow.webp'
 
 export const Biome = () => {
   return (
@@ -18,7 +19,7 @@ export const Biome = () => {
         'https://images.unsplash.com/photo-1469474968028-56623f02e42e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxuYXR1cmV8ZW58MHwwfHx8MTcyMTA0MjYwMXww&ixlib=rb-4.0.3&q=80&w=1080',
       ]}
     >
-    <section className="grid md:h-[600px] h-fit w-full place-content-center bg-[url('https://image.mux.com/K8QrwDyi02LcDaAA8CLnpILaTUK6Md9ek/thumbnail.jpg?time=0&width=2700&height=1519&fit_mode=smartcrop')] bg-opacity-20 bg-cover bg-center bg-no-repeat">
+    <section className="grid md:h-[600px] h-fit w-full place-content-center bg-[url('https://image.mux.com/K8QrwDyi02LcDaAA8CLnpILaTUK6Md9ek/thumbnail.jpg?time=0&width=2700&height=1519&fit_mode=smartcrop')] bg-opacity-20 bg-cover bg-center bg-no-repeat relative">
        <div className="flex flex-col justify-start items-start text-start md:w-1/2 w-full mt-20 px-12">
         <h4 className="font-extrabold text-5xl mb-2 text-white">What is a Biome?</h4>
         <p className="font-bold text-lg text-green-300 my-4">A biome is defined as a regional area characterized by the plants, animals, and climate in that area. Many of the plants and animals located in these areas area endemic to the biome. There are five primary biomes in the world:</p>
@@ -124,6 +125,10 @@ const MouseImageTrail = ({
   };
 
   return (
+    <div className="relative mt-16">
+      <p className="absolute -top-14 right-0 text-green-900 font-bold font-['helvetica']">Hover over this section</p>
+      <img src={Arrow} className="absolute -top-6 right-0 w-36 h-24" alt="Arrow" />
+
     <div
       ref={scope}
       className="relative overflow-hidden w-full border rounded-3xl shadow-2xl md:mt-20 mt-6 mb-12"
@@ -140,6 +145,7 @@ const MouseImageTrail = ({
           data-mouse-move-index={index}
         />
       ))}
+    </div>
     </div>
   );
 };
