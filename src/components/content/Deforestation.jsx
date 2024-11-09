@@ -1,5 +1,9 @@
 import React, { useState} from 'react';
 import Footer from './Footer';
+import NasaWildfireMap from '../Wildfire';
+import { motion } from "framer-motion";
+import greenMap from '../../assets/green-map.png'
+import DetailedCarbonCalculator from '../CarbonFootprint';
 
 const Deforestation = () => {
   const downloadPDF = () => {
@@ -13,78 +17,13 @@ const Deforestation = () => {
     link.click();
     
     document.body.removeChild(link);
-  };
-
-  const TreePlantingCalculator = () => {
-    // State variables to store user input and calculation results
-    const [numberOfTrees, setNumberOfTrees] = useState(0);
-    const [carbonSequestration, setCarbonSequestration] = useState(0);
-    const [oxygenProduction, setOxygenProduction] = useState(0);
-  
-    // Function to handle input change for number of trees
-    const handleNumberOfTreesChange = (event) => {
-      const trees = parseInt(event.target.value);
-      setNumberOfTrees(trees);
-    };
-  
-    // Function to calculate environmental impact
-    const calculateImpact = () => {
-      // Carbon sequestration rates in kg CO2 per year for different tree species
-      const carbonSequestrationRates = {
-        oak: 22,
-        pine: 11,
-        maple: 15,
-        cherry: 18
-      };
-  
-      // Oxygen production rates in kg O2 per year for different tree species
-      const oxygenProductionRates = {
-        oak: 38,
-        pine: 19,
-        maple: 26,
-        cherry: 32
-      };
-  
-      // Assuming the user selects a specific tree species
-      const selectedTreeSpecies = 'oak'; // Change this based on user selection
-  
-      // Calculate total carbon sequestration and oxygen production
-      const totalCarbonSequestration = numberOfTrees * carbonSequestrationRates[selectedTreeSpecies];
-      const totalOxygenProduction = numberOfTrees * oxygenProductionRates[selectedTreeSpecies];
-  
-      // Update state variables with the calculated values
-      setCarbonSequestration(totalCarbonSequestration);
-      setOxygenProduction(totalOxygenProduction);
-    };
-  
-    return (
-      <div>
-        <h2>Tree Planting Calculator</h2>
-        <div>
-          <label htmlFor="numberOfTrees">Number of Trees:</label>
-          <input
-            type="number"
-            id="numberOfTrees"
-            value={numberOfTrees}
-            onChange={handleNumberOfTreesChange}
-          />
-        </div>
-        <button onClick={calculateImpact}>Calculate Impact</button>
-        <div>
-          <h3>Environmental Impact:</h3>
-          <p>Total Carbon Sequestration: {carbonSequestration} kg CO2 per year</p>
-          <p>Total Oxygen Production: {oxygenProduction} kg O2 per year</p>
-        </div>
-      </div>
-    );
-  };
-  
+  };  
     
   return (
     <div className="w-full h-screen overflow-y-auto bg-green-50">
       <div className=' text-center flex flex-col px-6 md:px-0 py-4 container mx-auto text-center flex flex-col items-center justify-center sm:justify-normal md:justify-center px-6 md:px-0 md:max-w-[1300px] md:w-11/12 xl:w-[1300px] 2xl:w-[1300px] max-w-[1300px] relative'>
       <section className="relative overflow-hidden bg-gradient-to-b from-green-50 via-transparent to-transparent pb-12 pt-20 sm:pb-16 sm:pt-32 lg:pb-24 xl:pb-32 xl:pt-40">
-        <div className="relative z-10">
+        <div className="relative">
           <div className="absolute inset-x-0 top-1/2 -z-10 flex -translate-y-1/2 justify-center overflow-hidden [mask-image:radial-gradient(50%_45%_at_50%_55%,white,transparent)]">
             <svg className="h-[60rem] w-[100rem] flex-none stroke-green-600 opacity-20" aria-hidden="true">
               <defs>
@@ -99,7 +38,7 @@ const Deforestation = () => {
             </svg>
           </div>
         </div>
-        <div className="relative z-20  max-w-7xl px-6 lg:px-8">
+        <div className="relative px-6 flex flex-col items-center justify-center lg:px-8">
           <div className=" max-w-2xl text-center">
             <h1 className="text-6xl font-bold tracking-tight text-gray-900">
               Go Green:
@@ -117,24 +56,68 @@ const Deforestation = () => {
            <img className="w-full rounded-2xl border border-green-200 shadow-2xl" src="https://c4.wallpaperflare.com/wallpaper/428/376/851/forest-4k-desktop-background-hd-wallpaper-preview.jpg" alt="" />
           </div>
         </div>
-      </section>
-      </div>
-      <div className='md:px-6 px-4 py-24'>
-      <div className='flex md:flex-row flex-col items-center justify-between bg-[#186F65] rounded-2xl shadow-2xl md:px-8 px-4 py-12 md:text-left text-center'>
-        <div className='flex flex-col justify-center w-full'>
-          <h1 className='md:text-5xl text-3xl font-extrabold text-white mb-8'>The best time to plant a tree was twenty years ago. The second best time is now.</h1>
-          {/* <h2 className='md:text-4xl text-2xl font-bold text-white'>Celebrate Earth Day Everyday!!</h2> */}
-          <p className='text-[#F9F3CC] md:text-lg text-base md:font-semibold font-medium'>Planting a billion trees can help us curb the effects of climate change. It's a big number, but we know we can do it with your help. Planting a billion trees can help save the Earth from climate change and biodiversity loss. When we restore and conserve critical forests, we remove carbon and support biodiversity. A billion is a big number, but we know we can do it together. Help plant trees today!.</p>
+        <div>
+        <motion.div 
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className="text-center mt-24"
+        >
+          <div className="flex flex-col items-center justify-center mb-4">
+            <div className="inline-block px-3 py-2 text-sm font-semibold text-white rounded-lg text-cn bg-blue-900 hover:cursor-pointer hover:bg-opacity-90">
+              Conservation Trivia
+            </div>
+            <motion.h1
+              className="text-5xl font-bold text-center mt-4 mb-8 text-green-800"
+              initial={{ opacity: 0, y: -50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+            >
+              Test your knowledge
+            </motion.h1>
+            <motion.p
+              className="text-2xl text-center text-green-700 font-semibold"
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+            >
+              Think Green: Take the Quiz to Discover Your Conservation IQ!
+            </motion.p>
+          </div>
+          </motion.div>
+          <div className='flex md:flex-row flex-col items-center justify-between md:px-8 px-4 py-12 md:text-left text-center'>
+            <div className='flex flex-col justify-center w-full'>
+              <h1 className='md:text-5xl text-3xl font-extrabold text-green-900 mb-8'>Why Plant Trees?</h1>
+              {/* <h2 className='md:text-4xl text-2xl font-bold text-white'>Celebrate Earth Day Everyday!!</h2> */}
+              <p className='text-[#2b881c] md:text-lg text-base md:font-semibold font-medium'>Trees provide so many benefits to our everyday lives. They filter clean air, provide fresh drinking water, help curb climate change, and create homes for thousands of species of plants and animals. <span className='bg-yellow-200'>Trees help clean the air we breathe, filter the water we drink, and provide habitat to over 80% of the world's terrestrial biodiversity.</span>
+                Forests provide jobs to over 1.6 billion people, absorb harmful carbon from the atmosphere, and are key ingredients in 25% of all medicines. Have you ever taken an Aspirin? It comes from the bark of a tree!
+              </p>
+            </div>
+            <img src={greenMap} className='w-full' alt='' />
+          </div>
         </div>
-        <div className='w-full h-full'>
-	        <div className="relative overflow-hidden max-w-full w-full md:mt-0 mt-6" style={{paddingBottom: '56.25%'}}>
-		        <iframe title='abc' src="https://www.youtube.com/embed/3hxE7Af98AI?si=mnV02SRgrgmS56Dd" frameBorder="0" allowFullScreen className="absolute top-0 left-0 w-full h-full rounded-xl"></iframe>
+        <div className='flex items-center justify-center'>
+          <div className='md:w-[70%] w-fit'>
+            <NasaWildfireMap />
+          </div>
+        </div>
+      </section>
+        
+      <div className='py-24'>
+        <div className='flex md:flex-row flex-col items-center justify-between bg-[#186F65] rounded-2xl shadow-2xl md:px-8 px-4 py-12 md:text-left text-center'>
+          <div className='flex flex-col justify-center w-full'>
+            <h1 className='md:text-5xl text-3xl font-extrabold text-white mb-8'>The best time to plant a tree was twenty years ago. The second best time is now.</h1>
+            {/* <h2 className='md:text-4xl text-2xl font-bold text-white'>Celebrate Earth Day Everyday!!</h2> */}
+            <p className='text-[#F9F3CC] md:text-lg text-base md:font-semibold font-medium'>Planting a billion trees can help us curb the effects of climate change. It's a big number, but we know we can do it with your help. Planting a billion trees can help save the Earth from climate change and biodiversity loss. When we restore and conserve critical forests, we remove carbon and support biodiversity. A billion is a big number, but we know we can do it together. Help plant trees today!.</p>
+          </div>
+          <div className='w-full h-full'>
+	          <div className="relative overflow-hidden max-w-full w-full md:mt-0 mt-6" style={{paddingBottom: '56.25%'}}>
+		          <iframe title='abc' src="https://www.youtube.com/embed/3hxE7Af98AI?si=mnV02SRgrgmS56Dd" frameBorder="0" allowFullScreen className="absolute top-0 left-0 w-full h-full rounded-xl"></iframe>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <button onClick={downloadPDF} className="btn btn-success">Download</button>
-    <TreePlantingCalculator />
+      </div>
+      <DetailedCarbonCalculator />
 
     <Footer bgColor="#00704A" />
     </div>

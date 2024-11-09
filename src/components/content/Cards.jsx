@@ -103,7 +103,7 @@ const Cards = () =>{
         <div className="card bg-base-100 w-96 shadow-xl" style={{ boxShadow: '0px 10px 8px #999' }}>
           <figure>
             <img
-              src="https://www.surfertoday.com/images/jamp/page/ocean-breaking-wave.jpg"
+              src="https://images.unsplash.com/photo-1461503312594-019be44dd599?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8b2NlYW4lMjB3YXZlfGVufDB8fDB8fHww"
               alt="Save the Ocean" />
           </figure>
           <div className="card-body">

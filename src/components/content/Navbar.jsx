@@ -28,7 +28,7 @@ function Navbar({ user, email }) {
 
   return (
     <div className='px-4'>
-    <div className='fixed inset-x-0 top-0 z-30 mx-auto max-w-6xl md:w-[98%] w-full border border-gray-100 bg-white/80 py-2 shadow backdrop-blur-lg md:top-6 md:rounded-3xl'>
+    <div className='fixed inset-x-0 top-0 z-50 mx-auto max-w-6xl md:w-[98%] w-full border border-gray-100 bg-white/80 py-2 shadow backdrop-blur-lg md:top-6 md:rounded-3xl'>
       <div className='md:flex items-center justify-between px-6'>
         <div className='flex justify-between items-center'>
           <Link to='/home' className='font-extrabold text-2xl cursor-pointer text-[#2C7865] flex items-center md:gap-2'>
