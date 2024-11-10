@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { csv } from "d3-fetch";
 import { scaleLinear } from "d3-scale";
+import { motion } from "framer-motion";
 import Footer from './Footer';
+import { Info } from 'lucide-react';
 import { ComposableMap, Geographies, Geography, Sphere, Graticule } from "react-simple-maps";
+import DonateEarthCTA from "./Donate";
+import BeforeAfterSlider from "./ImageSlider";
 
 const geoUrl = "/features.json";
 
@@ -19,15 +23,21 @@ const MapChart = () => {
     });
   }, []);
 
+  const fadeInUp = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6 }
+  };
+
   return (
-    <div className="h-screen overflow-y-auto w-full bg-red-50">
-     <section className="pt-24">
-      <div className="px-12  max-w-7xl">
-        <div className="w-full  text-left md:w-11/12 xl:w-9/12 md:text-center">
-          <h1 className="mb-8 mt-8 text-4xl font-extrabold leading-none tracking-normal text-gray-800 md:text-6xl md:tracking-tight">
+    <div className="w-full bg-red-50">
+     <section className="flex flex-col items-center justify-center pt-24  text-center flex flex-col px-6 md:px-0 py-4 container mx-auto text-center flex flex-col items-center justify-center sm:justify-normal md:justify-center px-6 md:px-0 md:max-w-[1300px] md:w-11/12 xl:w-[1300px] 2xl:w-[1300px] max-w-[1300px] relative">
+      <div className="px-12">
+        <div className="w-full text-left md:text-center">
+          <h1 className="mb-8 max-w-4xl mt-8 text-4xl font-extrabold leading-none tracking-normal text-gray-800 md:text-6xl md:tracking-tight">
             <span>Save the planet, </span> <span className="block w-full py-2 text-transparent bg-clip-text leading-12 bg-gradient-to-r from-red-500 to-yellow-500 lg:inline">one degree </span><span> at a time.</span>
           </h1>
-          <p className="text-xl font-bold text-gray-600">
+          <p className="text-xl max-w-4xl font-bold text-gray-600">
             The effects of human-caused global warming are happening now, are irreversible for people alive today, and will worsen as long as humans add greenhouse gases to the atmosphere.
           </p>
           {/* <div className="mb-4 space-x-0 md:space-x-2 md:mb-8">
@@ -41,8 +51,8 @@ const MapChart = () => {
                 </a>
             </div> */}
         </div>
-        <div className="w-full  mt-20 text-center md:w-10/12">
-          <div className="relative z-0 w-full mt-8">
+        <div className="w-full  mt-20 text-center flex flex-col items-center justify-center">
+          <div className="relative z-0 w-full max-w-5xl mt-8">
             <div className="relative overflow-hidden shadow-2xl">
               <div className="flex items-center flex-none px-4 bg-gray-200 border rounded-b-none h-11 rounded-xl">
                 <div className="flex space-x-1.5">
@@ -82,10 +92,176 @@ const MapChart = () => {
           </div>
         </div>
       </div>
+      <div className="flex flex-col max-w-7xl items-center justify-center">
+      <motion.div 
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className="text-center mt-24"
+        >
+          <div className="flex flex-col items-center justify-center mb-4">
+            <div className="inline-block px-3 py-2 text-sm font-semibold text-white rounded-lg text-cn bg-blue-900 hover:cursor-pointer hover:bg-opacity-90">
+              Take Action Today
+            </div>
+            <motion.h1
+              className="text-5xl font-bold text-center mt-4 mb-8 text-green-800"
+              initial={{ opacity: 0, y: -50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+            >
+              The Impacts of Climate Change
+            </motion.h1>
+            <motion.p
+              className="text-xl text-center text-green-700 font-semibold"
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+            >
+              Climate change affects us all. Together, we can reduce its effects and create a sustainable future.
+            </motion.p>
+          </div>
+          </motion.div>
+          <div className="max-w-7xl mx-auto p-8 grid gap-8">
+      {/* Natural Causes Card */}
+      <motion.div 
+        className="bg-white rounded-3xl shadow-lg overflow-hidden"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        whileHover={{ scale: 1.02 }}
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-2">
+          <div className="p-8">
+            <motion.h4 
+              className="text-3xl font-bold mt-4 mb-8 text-red-600 flex items-center gap-2"
+              {...fadeInUp}
+            >
+              <Info className="w-6 h-6" />
+              Natural Causes
+            </motion.h4>
+            <motion.ul 
+              className="list-disc list-inside text-gray-600 space-y-4"
+              variants={{
+                hidden: { opacity: 0 },
+                show: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.2
+                  }
+                }
+              }}
+              initial="hidden"
+              animate="show"
+            >
+              <motion.li 
+                className="text-lg"
+                variants={fadeInUp}
+              >
+                <span className="text-xl text-red-800 font-bold">Volcanic Eruptions: </span>
+                Release gases and particulates that temporarily affect the atmosphere.
+              </motion.li>
+              <motion.li 
+                className="text-lg"
+                variants={fadeInUp}
+              >
+                <span className="text-xl text-red-800 font-bold">Solar Radiation Variability: </span>
+                Changes in the sun's energy output can influence global temperatures.
+              </motion.li>
+              <motion.li 
+                className="text-lg"
+                variants={fadeInUp}
+              >
+                <span className="text-xl text-red-800 font-bold">Ocean Currents and Cycles: </span>
+                Natural ocean cycles, like El Niño and La Niña, temporarily shift global weather patterns, affecting temperatures, rainfall, and regional climates.
+              </motion.li>
+            </motion.ul>
+          </div>
+          <motion.div 
+            className="w-full relative overflow-hidden"
+            transition={{ duration: 0.3 }}
+          >
+            <img 
+              src="https://www.ifrc.org/sites/default/files/styles/article_press_release_featured_image/public/2021-08/p-IDN1088_jpg%201280x853.jpg?itok=TEoXltaR"
+              alt="Natural causes" 
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
+        </div>
+      </motion.div>
+
+      {/* Human-Induced Causes Card */}
+      <motion.div 
+        className="bg-white rounded-3xl shadow-lg overflow-hidden"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        whileHover={{ scale: 1.02 }}
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-2">
+          <motion.div 
+            className="relative w-full order-2 lg:order-1"
+            transition={{ duration: 0.3 }}
+          >
+            <img 
+              src="https://static.wixstatic.com/media/ac4f57_5adf54ed0a6e4a7082e186c659b649a8~mv2.jpg/v1/fill/w_568,h_370,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/ac4f57_5adf54ed0a6e4a7082e186c659b649a8~mv2.jpg"
+              alt="Human-induced causes" 
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
+          <div className="p-8 order-1 lg:order-2">
+            <motion.h4 
+              className="text-3xl font-bold mt-4 mb-8 text-red-600 flex items-center gap-2"
+              {...fadeInUp}
+            >
+              <Info className="w-6 h-6" />
+              Human-Induced Causes
+            </motion.h4>
+            <motion.ul 
+              className="list-disc list-inside text-gray-600 space-y-4"
+              variants={{
+                hidden: { opacity: 0 },
+                show: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.2
+                  }
+                }
+              }}
+              initial="hidden"
+              animate="show"
+            >
+              <motion.li 
+                className="text-lg"
+                variants={fadeInUp}
+              >
+                <span className="text-xl text-red-800 font-bold">Greenhouse Gas Emissions: </span>
+                Emissions from industries, agriculture, and transportation increase concentrations of gases like CO₂, methane, and nitrous oxide.
+              </motion.li>
+              <motion.li 
+                className="text-lg"
+                variants={fadeInUp}
+              >
+                <span className="text-xl text-red-800 font-bold">Deforestation: </span>
+                Reduces carbon storage capacity of forests, increasing CO₂ in the atmosphere.
+              </motion.li>
+              <motion.li 
+                className="text-lg"
+                variants={fadeInUp}
+              >
+                <span className="text-xl text-red-800 font-bold">Industrialization: </span>
+                Use of fossil fuels and chemicals in production processes contributes to atmospheric pollution.
+              </motion.li>
+            </motion.ul>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+
+      </div>
      </section>
+     
       {/* <hr style={{ background: 'lime', border: 'none', height: '3px', margin: '0' }} /> */}
-      <div className="flex md:px-8 px-2 py-24">
-        <div className='flex md:flex-row flex-col items-center justify-between gap-5 bg-[#12486B] rounded-2xl shadow-2xl md:px-12 px-2 py-12 md:text-left text-center'>
+      <div className="flex items-center justify-center md:px-8 px-2 py-24">
+        <div className='flex md:flex-row max-w-7xl flex-col items-center justify-between gap-5 bg-[#12486B] rounded-2xl shadow-2xl md:px-12 px-2 py-12 md:text-left text-center'>
           <div className="flex flex-col w-3/4">
             <h1 className='md:text-4xl text-3xl font-extrabold text-white mb-8'>Every increase in global warming matters !!</h1>
             <h2 className='md:text-2xl text-2xl font-bold text-white'>From the map, we can infer that the amount of C02 consumptions has increased drastically over the years</h2>
@@ -97,6 +273,12 @@ const MapChart = () => {
                 </div>
             <span className="text-base text-center mt-2 font-bold text-white">A short film regarding climate change and its drastic effects (cc: DJI captures)</span>
           </div>
+        </div>
+      </div>
+      <BeforeAfterSlider />
+      <div className="flex flex-col w-full items-center justify-center">
+        <div className="my-24 w-fit ">
+          <DonateEarthCTA />
         </div>
       </div>
       <div className="bg-[#E72929]">
