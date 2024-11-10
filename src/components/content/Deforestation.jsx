@@ -2,8 +2,9 @@ import React, { useState} from 'react';
 import Footer from './Footer';
 import NasaWildfireMap from '../Wildfire';
 import { motion } from "framer-motion";
-import greenMap from '../../assets/green-map.png'
-import DetailedCarbonCalculator from '../CarbonFootprint';
+import greenMap from '../../assets/green-map.png';
+import DetailedCarbonCalculator from './CarbonFootprint';
+import DonateEarthCTA from './Donate';
 
 const Deforestation = () => {
   const downloadPDF = () => {
@@ -40,11 +41,11 @@ const Deforestation = () => {
         </div>
         <div className="relative px-6 flex flex-col items-center justify-center lg:px-8">
           <div className=" max-w-2xl text-center">
-            <h1 className="text-6xl font-bold tracking-tight text-gray-900">
+            <h1 className="text-6xl font-bold text-gray-900 leading-[65px]">
               Go Green:
               <span className="text-green-600 ml-2">Green Environment for Life</span>
             </h1>
-            <h2 className="mt-6 text-lg leading-8 text-gray-600">Let us raise our voice to put an end to deforestation and save trees!!</h2>
+            <h2 className="mt-8 text-xl font-semibold leading-8 text-gray-600">Let us raise our voice to put an end to deforestation and save trees!!</h2>
             <div className="indicator mt-10">
               <span className="indicator-item badge badge-primary">cc: Earthdaynetwork</span> 
               <button onClick={downloadPDF} className="flex btn btn-success text-white font-bold">Download PDF
@@ -64,7 +65,7 @@ const Deforestation = () => {
         >
           <div className="flex flex-col items-center justify-center mb-4">
             <div className="inline-block px-3 py-2 text-sm font-semibold text-white rounded-lg text-cn bg-blue-900 hover:cursor-pointer hover:bg-opacity-90">
-              Conservation Trivia
+              Why Trees?
             </div>
             <motion.h1
               className="text-5xl font-bold text-center mt-4 mb-8 text-green-800"
@@ -72,7 +73,7 @@ const Deforestation = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              Test your knowledge
+              The Power of Planting Trees
             </motion.h1>
             <motion.p
               className="text-2xl text-center text-green-700 font-semibold"
@@ -80,11 +81,11 @@ const Deforestation = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
             >
-              Think Green: Take the Quiz to Discover Your Conservation IQ!
+              Discover how trees combat climate change and support a healthier planet.
             </motion.p>
           </div>
           </motion.div>
-          <div className='flex md:flex-row flex-col items-center justify-between md:px-8 px-4 py-12 md:text-left text-center'>
+          <div className='flex md:flex-row flex-col items-center justify-between md:px-8 px-4 pt-4 pb-12 md:text-left text-center'>
             <div className='flex flex-col justify-center w-full'>
               <h1 className='md:text-5xl text-3xl font-extrabold text-green-900 mb-8'>Why Plant Trees?</h1>
               {/* <h2 className='md:text-4xl text-2xl font-bold text-white'>Celebrate Earth Day Everyday!!</h2> */}
@@ -103,9 +104,9 @@ const Deforestation = () => {
       </section>
         
       <div className='py-24'>
-        <div className='flex md:flex-row flex-col items-center justify-between bg-[#186F65] rounded-2xl shadow-2xl md:px-8 px-4 py-12 md:text-left text-center'>
+        <div className='flex md:flex-row flex-col items-center justify-between bg-[#186F65] rounded-2xl shadow-2xl md:px-8 px-4 py-12 md:text-left gap-8 text-center'>
           <div className='flex flex-col justify-center w-full'>
-            <h1 className='md:text-5xl text-3xl font-extrabold text-white mb-8'>The best time to plant a tree was twenty years ago. The second best time is now.</h1>
+            <h1 className='md:text-4xl text-3xl font-extrabold text-white mb-8'>The best time to plant a tree was twenty years ago. The second best time is now.</h1>
             {/* <h2 className='md:text-4xl text-2xl font-bold text-white'>Celebrate Earth Day Everyday!!</h2> */}
             <p className='text-[#F9F3CC] md:text-lg text-base md:font-semibold font-medium'>Planting a billion trees can help us curb the effects of climate change. It's a big number, but we know we can do it with your help. Planting a billion trees can help save the Earth from climate change and biodiversity loss. When we restore and conserve critical forests, we remove carbon and support biodiversity. A billion is a big number, but we know we can do it together. Help plant trees today!.</p>
           </div>
@@ -115,9 +116,12 @@ const Deforestation = () => {
             </div>
           </div>
         </div>
-      </div>
-      </div>
       <DetailedCarbonCalculator />
+      </div>
+      <div className="mb-24 w-full">
+        <DonateEarthCTA />
+      </div>
+      </div>
 
     <Footer bgColor="#00704A" />
     </div>

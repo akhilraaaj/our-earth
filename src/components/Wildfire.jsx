@@ -187,7 +187,7 @@ const NasaWildfireMap = () => {
         >
           <div className="flex flex-col items-center justify-center my-4">
             <div className="inline-block px-3 py-2 text-sm font-semibold text-white rounded-lg text-cn bg-blue-900 hover:cursor-pointer hover:bg-opacity-90">
-              Conservation Trivia
+              Wildfire Tracker
             </div>
             <motion.h1
               className="text-5xl font-bold text-center mt-4 mb-8 text-green-800"
@@ -195,7 +195,7 @@ const NasaWildfireMap = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              Test your knowledge
+              Stay Informed on Wildfires
             </motion.h1>
             <motion.p
               className="text-2xl text-center text-green-700 font-semibold"
@@ -203,7 +203,7 @@ const NasaWildfireMap = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
             >
-              Think Green: Take the Quiz to Discover Your Conservation IQ!
+              Track active wildfires and understand their impact on communities and nature.
             </motion.p>
           </div>
           

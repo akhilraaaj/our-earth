@@ -4,7 +4,9 @@ import {
   Utensils, Train, Bus, Lightbulb, Droplets,
   ThermometerSun, Shirt, Package
 } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import CarbonFootprint from '../../assets/carbon-footprint.png'
 
 export const Slider = ({ min = 0, max = 100, step = 1, value = [0], onValueChange, className = '' }) => {
     const handleChange = (e) => {
@@ -20,7 +22,7 @@ export const Slider = ({ min = 0, max = 100, step = 1, value = [0], onValueChang
           step={step}
           value={value[0]}
           onChange={handleChange}
-          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#186F65]"
         />
       </div>
     );
@@ -41,7 +43,7 @@ export const Slider = ({ min = 0, max = 100, step = 1, value = [0], onValueChang
   
   export const TabsList = ({ children, activeTab, setActiveTab }) => {
     return (
-      <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg mb-4">
+      <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg mb-8">
         {React.Children.map(children, child => {
           if (!child) return null;
           return React.cloneElement(child, { activeTab, setActiveTab });
@@ -53,9 +55,9 @@ export const Slider = ({ min = 0, max = 100, step = 1, value = [0], onValueChang
   export const TabsTrigger = ({ value, children, activeTab, setActiveTab }) => {
     return (
       <button
-        className={`px-4 py-2 text-sm font-medium rounded-md flex-1 transition-colors
+        className={`px-4 py-2 text-base font-bold rounded-md flex-1 transition-colors
           ${activeTab === value 
-            ? 'bg-white text-blue-600 shadow-sm' 
+            ? 'bg-[#186F65] text-white shadow-sm' 
             : 'text-gray-600 hover:bg-gray-200'
           }`}
         onClick={() => setActiveTab(value)}
@@ -67,8 +69,28 @@ export const Slider = ({ min = 0, max = 100, step = 1, value = [0], onValueChang
   
   export const TabsContent = ({ value, children, activeTab }) => {
     if (value !== activeTab) return null;
-    return <div className="mt-2">{children}</div>;
+  
+    return (
+      <div className="relative mt-2 px-4 py-4 rounded-3xl bg-[rgba(47,133,90,0.9)] shadow-2xl overflow-hidden">
+        {/* SVG Background Pattern */}
+
+        <svg className="absolute inset-0 w-full h-full opacity-50" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <pattern id="dotsPattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+        <circle cx="10" cy="10" r="2.5" fill="rgba(255,255,255,0.2)" />
+        <circle cx="0" cy="0" r="1.5" fill="rgba(255,255,255,0.1)" />
+        <circle cx="20" cy="20" r="1.5" fill="rgba(255,255,255,0.1)" />
+      </pattern>
+      <rect width="100%" height="100%" fill="url(#dotsPattern)" />
+    </svg>
+  
+        {/* Children Content */}
+        <div className="relative z-10">
+          {children}
+        </div>
+      </div>
+    );
   };
+  
 
 const DetailedCarbonCalculator = () => {
   const [values, setValues] = useState({
@@ -161,11 +183,11 @@ const DetailedCarbonCalculator = () => {
 
   const renderSlider = (icon, label, field, max, step, unit, description) => (
     <div className="mb-6">
-      <div className="flex items-center gap-2 mb-2">
+      <div className="flex items-center text-white font-bold gap-2 mb-2">
         {icon}
-        <div>
-          <span className="font-medium">{label}</span>
-          <p className="text-sm text-gray-500">{description}</p>
+        <div className='text-start'>
+          <span className="font-bold text-lg">{label}</span>
+          <p className="text-sm font-medium text-gray-100">{description}</p>
         </div>
       </div>
       <div className="space-y-2">
@@ -176,7 +198,7 @@ const DetailedCarbonCalculator = () => {
           onValueChange={(value) => setValues({ ...values, [field]: value[0] })}
           className="w-full"
         />
-        <div className="text-sm text-gray-500">
+        <div className="text-sm text-white font-bold">
           {values[field]} {unit}
         </div>
       </div>
@@ -197,11 +219,43 @@ const DetailedCarbonCalculator = () => {
   }));
 
   return (
-    <div className="w-full max-w-4xl mx-auto space-y-4">
+    <div className="w-full max-w-6xl mx-auto space-y-4">
       <div>
-        <div>
-          <div className="text-2xl font-bold text-center">
-            Detailed Carbon Footprint Calculator
+      <motion.div 
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className="text-center mb-12"
+        >
+          <div className="flex flex-col items-center justify-center mb-4 mt-24">
+            <div className="inline-block px-3 py-2 text-sm font-semibold text-white rounded-lg text-cn bg-blue-900 hover:cursor-pointer hover:bg-opacity-90">
+              Emissions Check
+            </div>
+            <motion.h1
+              className="text-5xl font-bold text-center mt-4 mb-8 text-green-800"
+              initial={{ opacity: 0, y: -50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+            >
+              Carbon Footprint Calculator
+            </motion.h1>
+            <motion.p
+              className="text-2xl text-center text-green-700 font-semibold"
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+            >
+              Use our calculator to find your carbon footprint and ways to reduce it.
+            </motion.p>
+          </div>
+        </motion.div>
+        <div className='flex items-center justify-center mb-16'>
+          <div className='flex flex-col text-start'>
+            <h4 className='md:text-4xl text-3xl font-extrabold text-green-900 mb-8'>What is a carbon footprint?</h4>
+            <p className='text-[#2b881c] md:text-lg text-base md:font-semibold font-medium'>A carbon footprint is the total amount of greenhouse gases (including carbon dioxide and methane) that are generated by our actions.</p>
+            <p className='text-[#2b881c] md:text-lg text-base md:font-semibold font-medium'>Calculate your carbon footprint below:</p>
+          </div>
+          <div className='sm:block hidden'>
+            <img src={CarbonFootprint} alt='' className='w-full h-[300px]' />
           </div>
         </div>
         <div>
@@ -354,7 +408,7 @@ const DetailedCarbonCalculator = () => {
         <div className="pt-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <h3 className="text-lg font-semibold mb-4">Emissions Breakdown</h3>
+              <h3 className="text-lg font-bold mb-4">Emissions Breakdown</h3>
               <ResponsiveContainer width="100%" height={300}>
                 <PieChart>
                   <Pie
@@ -376,7 +430,7 @@ const DetailedCarbonCalculator = () => {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-4">Detailed Analysis</h3>
+              <h3 className="text-lg font-bold mb-4">Detailed Analysis</h3>
               <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={barChartData}>
                   <XAxis dataKey="name" angle={-45} textAnchor="end" height={60} />
@@ -388,7 +442,7 @@ const DetailedCarbonCalculator = () => {
             </div>
           </div>
 
-          <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+          <div className="mt-6 p-4 bg-[rgba(44,122,123,0.9)] text-white rounded-lg">
             <div className="text-center mb-4">
               <div className="text-lg font-medium mb-2">
                 Total Annual Carbon Footprint
@@ -401,7 +455,7 @@ const DetailedCarbonCalculator = () => {
             <div className="space-y-2">
               <h4 className="font-medium">Recommendations:</h4>
               {getRecommendations().map((rec, index) => (
-                <div key={index}>
+                <div key={index} className='flex items-center justify-center gap-4 bg-gray-200 p-2 rounded-xl font-bold text-[rgba(44,122,123,0.9)]'>
                   <Leaf className="h-4 w-4" />
                   <div>{rec}</div>
                 </div>
