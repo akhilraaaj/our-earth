@@ -139,7 +139,7 @@ const MapChart = () => {
               Natural Causes
             </motion.h4>
             <motion.ul 
-              className="list-disc list-inside text-gray-600 space-y-4"
+              className="list-disc text-start list-inside text-gray-600 space-y-4"
               variants={{
                 hidden: { opacity: 0 },
                 show: {
@@ -216,7 +216,7 @@ const MapChart = () => {
               Human-Induced Causes
             </motion.h4>
             <motion.ul 
-              className="list-disc list-inside text-gray-600 space-y-4"
+              className="list-disc list-inside text-start text-gray-600 space-y-4"
               variants={{
                 hidden: { opacity: 0 },
                 show: {
@@ -261,7 +261,6 @@ const MapChart = () => {
         <div className='flex md:flex-row max-w-7xl flex-col items-center justify-between gap-5 bg-[#12486B] rounded-2xl shadow-2xl md:px-12 px-2 py-12 md:text-left text-center'>
           <div className="flex flex-col w-3/4">
             <h1 className='md:text-4xl text-3xl font-extrabold text-white mb-8'>Every increase in global warming matters !!</h1>
-            <h2 className='md:text-2xl text-2xl font-bold text-white'>From the map, we can infer that the amount of C02 consumptions has increased drastically over the years</h2>
             <p className='text-[#F9F3CC] md:text-lg text-base md:font-semibold font-medium mt-2'>Climate change can affect our health, ability to grow food, housing, safety and work. Some of us are already more vulnerable to climate impacts, such as people living in small island nations and other developing countries. In the future, the number of people displaced by weather-related events is expected to rise. Therefore, it is high time we take a step forward to tackle, reduce or store C02 emissions to save our planet!!</p>
           </div>
           <div className="flex flex-col">

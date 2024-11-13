@@ -3,8 +3,8 @@ import Footer from './Footer';
 
 function HeroHome() {
   return (
-    <div className="h-screen overflow-y-auto w-full">
-    <section className="relative bg-red-50">
+    <div className=" bg-red-50 overflow-y-auto w-full">
+    <section className="flex flex-col items-center justify-center pt-24  text-center flex flex-col px-6 md:px-0 py-4 container mx-auto text-center flex flex-col items-center justify-center sm:justify-normal md:justify-center px-6 md:px-0 md:max-w-[1300px] md:w-11/12 xl:w-[1300px] 2xl:w-[1300px] max-w-[1300px] relative">
       <div className="absolute left-1/2 transform -translate-x-1/2 bottom-0 pointer-events-none" aria-hidden="true">
         <svg width="1360" height="578" viewBox="0 0 1360 578" xmlns="http://www.w3.org/2000/svg">
           <defs>
