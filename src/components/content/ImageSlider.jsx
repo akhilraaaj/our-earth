@@ -60,15 +60,15 @@ const BeforeAfterSlider = () => {
         >
           <div className="flex flex-col items-center justify-center my-4">
             <div className="inline-block px-3 py-2 text-sm font-semibold text-white rounded-lg text-cn bg-blue-900 hover:cursor-pointer hover:bg-opacity-90">
-              Wildfire Tracker
+              Climate Impact: Drought Crisis
             </div>
             <motion.h1
-              className="text-5xl font-bold text-center mt-4 mb-8 text-green-800"
+              className="text-5xl font-bold text-center mt-5 mb-8 text-green-800"
               initial={{ opacity: 0, y: -50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              Stay Informed on Wildfires
+              Droughts Driven by Climate Change
             </motion.h1>
             <motion.p
               className="text-2xl text-center text-green-700 font-semibold"
@@ -76,7 +76,7 @@ const BeforeAfterSlider = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
             >
-              Track active wildfires and understand their impact on communities and nature.
+              Exploring how rising temperatures are intensifying water scarcity.
             </motion.p>
           </div>
           
@@ -124,7 +124,9 @@ const BeforeAfterSlider = () => {
         <div className="absolute bottom-4 right-4 bg-black bg-opacity-50 text-white px-2 py-1 rounded select-none">
           After
         </div>
+        
       </div>
+      <p className='text-base mt-4 text-center font-bold text-gray-800'>The "before" photo on the left shows Stevens Creek Reservoir in Cupertino, California, as it appeared on June 30, 2020. This artificial lake is located in the foothills of the Santa Cruz Mountains. The "after" photo on the right reveals the severe impact of California's drought, illustrating how climate change has worsened drought conditions across the western United States.</p>
     </div>
   );
 };

@@ -34,7 +34,7 @@ const MapChart = () => {
      <section className="flex flex-col items-center justify-center pt-24  text-center flex flex-col px-6 md:px-0 py-4 container mx-auto text-center flex flex-col items-center justify-center sm:justify-normal md:justify-center px-6 md:px-0 md:max-w-[1300px] md:w-11/12 xl:w-[1300px] 2xl:w-[1300px] max-w-[1300px] relative">
       <div className="px-12">
         <div className="w-full text-left md:text-center">
-          <h1 className="mb-8 max-w-4xl mt-8 text-4xl font-extrabold leading-none tracking-normal text-gray-800 md:text-6xl md:tracking-tight">
+          <h1 className="mb-8 max-w-4xl mt-20 text-4xl font-extrabold leading-none tracking-normal text-gray-800 md:text-6xl md:tracking-tight">
             <span>Save the planet, </span> <span className="block w-full py-2 text-transparent bg-clip-text leading-12 bg-gradient-to-r from-red-500 to-yellow-500 lg:inline">one degree </span><span> at a time.</span>
           </h1>
           <p className="text-xl max-w-4xl font-bold text-gray-600">
@@ -51,9 +51,9 @@ const MapChart = () => {
                 </a>
             </div> */}
         </div>
-        <div className="w-full  mt-20 text-center flex flex-col items-center justify-center">
+        <div className="w-full mt-12 text-center flex flex-col items-center justify-center">
           <div className="relative z-0 w-full max-w-5xl mt-8">
-            <div className="relative overflow-hidden shadow-2xl">
+            <div className="relative overflow-hidden shadow-2xl mb-3">
               <div className="flex items-center flex-none px-4 bg-gray-200 border rounded-b-none h-11 rounded-xl">
                 <div className="flex space-x-1.5">
                   <div className="w-4 h-4  bg-red-500 rounded-full"></div>
@@ -88,7 +88,7 @@ const MapChart = () => {
               </div>
               </div>
             </div>
-            <span className="text-sm text-center font-medium text-red-400">The map above shows the C02 emissions per country</span>
+            <span className="text-sm text-center font-medium text-red-400">From the map above, we can infer that the amount of C02 consumptions has increased drastically over the years</span>
           </div>
         </div>
       </div>
@@ -257,9 +257,6 @@ const MapChart = () => {
     </div>
 
       </div>
-     </section>
-     
-      {/* <hr style={{ background: 'lime', border: 'none', height: '3px', margin: '0' }} /> */}
       <div className="flex items-center justify-center md:px-8 px-2 py-24">
         <div className='flex md:flex-row max-w-7xl flex-col items-center justify-between gap-5 bg-[#12486B] rounded-2xl shadow-2xl md:px-12 px-2 py-12 md:text-left text-center'>
           <div className="flex flex-col w-3/4">
@@ -276,11 +273,13 @@ const MapChart = () => {
         </div>
       </div>
       <BeforeAfterSlider />
-      <div className="flex flex-col w-full items-center justify-center">
-        <div className="my-24 w-fit ">
-          <DonateEarthCTA />
-        </div>
+      <div className="w-full py-20">
+        <DonateEarthCTA />
       </div>
+     </section>
+     
+      
+      
       <div className="bg-[#E72929]">
       <Footer bgColor="#E72929" />
       </div>
