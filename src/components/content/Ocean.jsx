@@ -1,83 +1,157 @@
-import React from 'react';
-import Footer from './Footer';
+import React from "react";
+import { motion } from "framer-motion";
+import Footer from "./Footer";
+import CoralReef3D from "./OceanSpecies";
+import OceanViewer from "./MarineSuccessStories";
+import DonateEarthCTA from "./Donate";
 
-function HeroHome() {
+
+const fadeIn = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" }
+  }
+};
+
+const Ocean = () => {
   return (
-    <div className=" bg-red-50 overflow-y-auto w-full">
-    <section className="flex flex-col items-center justify-center pt-24  text-center flex flex-col px-6 md:px-0 py-4 container mx-auto text-center flex flex-col items-center justify-center sm:justify-normal md:justify-center px-6 md:px-0 md:max-w-[1300px] md:w-11/12 xl:w-[1300px] 2xl:w-[1300px] max-w-[1300px] relative">
-      <div className="absolute left-1/2 transform -translate-x-1/2 bottom-0 pointer-events-none" aria-hidden="true">
-        <svg width="1360" height="578" viewBox="0 0 1360 578" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-           <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="illustration-01">
-            <stop stopColor="#FFF" offset="0%" />
-            <stop stopColor="#EAEAEA" offset="77.402%" />
-            <stop stopColor="#DFDFDF" offset="100%" />
-           </linearGradient>
-          </defs>
-          <g fill="url(#illustration-01)" fillRule="evenodd">
-            <circle cx="1232" cy="128" r="128" />
-            <circle cx="155" cy="443" r="64" />
-          </g>
-        </svg>
-      </div>
-      <div className="max-w-6xl  px-4 sm:px-6">
-        <div className="pt-32 pb-12 md:pt-40 md:pb-20">
-          <div className="text-center pb-12 md:pb-16">
-            <h1 className="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4" data-aos="zoom-y-out">Make your website <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">wonderful</span></h1>
-            <div className="max-w-3xl ">
-              <p className="text-xl text-gray-600 mb-8" data-aos="zoom-y-out" data-aos-delay="150">Our landing page template works on all devices, so you only have to set it up once, and get beautiful results forever.</p>
-              <div className="max-w-xs  sm:max-w-none sm:flex sm:justify-center" data-aos="zoom-y-out" data-aos-delay="300"><div>
-              <a className="btn text-white bg-blue-600 hover:bg-blue-700 w-full mb-4 sm:w-auto sm:mb-0" href="#0">Start free trial</a>
-            </div>
-            <div>
-              <a className="btn text-white bg-gray-900 hover:bg-gray-800 w-full sm:w-auto sm:ml-4" href="#0">Learn more</a>
-            </div>
-          </div>
+    <div className=" bg-blue-50 overflow-x-hidden w-full">
+      <section className="relative flex flex-col items-center justify-center w-full">
+        {/* Background decoration */}
+        <div
+          className="absolute left-0 transform  top-0 pointer-events-none"
+          aria-hidden="true"
+        >
+          <motion.svg
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1 }}
+            width="1360"
+            height="578"
+            viewBox="0 0 1360 578"
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-full"
+          >
+            <defs>
+              <linearGradient
+                x1="50%"
+                y1="0%"
+                x2="50%"
+                y2="100%"
+                id="illustration-01"
+              >
+                <stop stopColor="#FFF" offset="0%" />
+                <stop stopColor="#EAEAEA" offset="77.402%" />
+                <stop stopColor="#DFDFDF" offset="100%" />
+              </linearGradient>
+            </defs>
+            <g fill="url(#illustration-01)" fillRule="evenodd">
+              <circle cx="1232" cy="128" r="128" />
+              <circle cx="155" cy="443" r="64" />
+            </g>
+          </motion.svg>
         </div>
-      </div>
-      <div>
-        <div className="relative flex justify-center mb-8" data-aos="zoom-y-out" data-aos-delay="450">
-          <div className="flex flex-col justify-center">
-            {/* <img className="" src={require('../images/hero-image.png')} width="768" height="432" alt="Hero" /> */}
-            <svg className="absolute inset-0 max-w-full  md:max-w-none h-auto" width="768" height="432" viewBox="0 0 768 432" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-              <defs>
-                <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="hero-ill-a">
-                  <stop stopColor="#FFF" offset="0%" />
-                  <stop stopColor="#EAEAEA" offset="77.402%" />
-                  <stop stopColor="#DFDFDF" offset="100%" />
-                </linearGradient>
-                <linearGradient x1="50%" y1="0%" x2="50%" y2="99.24%" id="hero-ill-b">
-                  <stop stopColor="#FFF" offset="0%" />
-                  <stop stopColor="#EAEAEA" offset="48.57%" />
-                  <stop stopColor="#DFDFDF" stopOpacity="0" offset="100%" />
-                </linearGradient>
-                <radialGradient cx="21.152%" cy="86.063%" fx="21.152%" fy="86.063%" r="79.941%" id="hero-ill-e">
-                  <stop stopColor="#4FD1C5" offset="0%" />
-                  <stop stopColor="#81E6D9" offset="25.871%" />
-                  <stop stopColor="#338CF5" offset="100%" />
-                </radialGradient>
-                <circle id="hero-ill-d" cx="384" cy="216" r="64" />
-              </defs>
-              <g fill="none" fillRule="evenodd">
-                <circle fillOpacity=".04" fill="url(#hero-ill-a)" cx="384" cy="216" r="128" />
-                <circle fillOpacity=".16" fill="url(#hero-ill-b)" cx="384" cy="216" r="96" />
-                <g fillRule="nonzero">
-                  <use fill="#000" xlinkHref="#hero-ill-d" />
-                  <use fill="url(#hero-ill-e)" xlinkHref="#hero-ill-d" />
-                </g>
-              </g>
-            </svg>
-          </div>
-        </div>
-      </div>
-     </div>
-    </div>
-   </section>
-   <div className="bg-[#4793AF]">
-   <Footer bgColor="#4793AF" />
-   </div>
-   </div>
-  );
-}
 
-export default HeroHome;
+        <div className="container px-4 sm:px-6 lg:px-0 max-w-7xl">
+          <div className="flex flex-col items-center justify-center pt-20 lg:pt-32 pb-12 lg:pb-20">
+            <div className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto">
+              <motion.h1
+                variants={fadeIn}
+                initial="hidden"
+                animate="visible"
+                className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 lg:mb-8"
+              >
+                Protect the{" "}
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400 animate-gradient">
+                  Oceans
+                </span>
+              </motion.h1>
+              
+              <motion.p
+                variants={fadeIn}
+                initial="hidden"
+                animate="visible"
+                transition={{ delay: 0.2 }}
+                className="text-lg sm:text-xl text-gray-600 mb-8 lg:mb-12 leading-relaxed max-w-3xl mx-auto"
+              >
+                For centuries, people have assumed that our vast ocean was
+                limitless and immune to human impacts. It's only recently that
+                scientists have come to understand the devastating effects we've
+                already had on the seas.
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+                className="flex flex-wrap gap-4 justify-center"
+              >
+                <button className="px-8 py-3 bg-gradient-to-r from-blue-500 to-teal-400 text-white rounded-lg font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200">
+                  Learn More
+                </button>
+                <button className="px-8 py-3 border-2 border-blue-500 text-blue-500 rounded-lg font-semibold hover:bg-blue-50 transform hover:-translate-y-1 transition-all duration-200">
+                  Get Involved
+                </button>
+              </motion.div>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+              className="mt-16 lg:mt-24 max-w-3xl rounded-3xl"
+            >
+              <img src="https://wallpapers.com/images/hd/exquisite-4k-underwater-marine-life-gba33q70g1917hns.jpg" alt="" className="rounded-3xl" />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+              className="mt-16 lg:mt-24 w-full"
+            >
+              <CoralReef3D />
+            </motion.div>
+            
+          </div>
+          <div className="flex items-center justify-center md:px-8 px-2 py-24">
+        <div className='flex md:flex-row max-w-7xl flex-col items-center justify-between gap-5 bg-[#12486B] rounded-2xl shadow-2xl md:px-12 px-2 py-12 md:text-left text-center'>
+          <div className="flex flex-col w-3/4">
+            <h1 className='md:text-4xl text-3xl font-extrabold text-white mb-8'>By 2050, there will be more plastic than fish in the ocean</h1>
+            <p className='text-[#F9F3CC] md:text-lg text-base md:font-semibold font-medium mt-2'>Plastic waste makes up 80% of all marine pollution and around 8 to 10 million metric tons of plastic end up in the ocean each year and they pose a huge threat not only to the ocean life but also the whole world. Therefore, it is high time we take steps to tackle the issue and make our planet sustainable.</p>
+          </div>
+          <div className="flex flex-col">
+          <img src="/images/ocean-earth.png" className='w-[500px] h-[450px]' alt="" />
+          </div>
+        </div>
+      </div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 0.8 }}
+            className="mb-20"
+          >
+            <OceanViewer />
+          </motion.div>
+          <div className="mb-24 w-full">
+        <DonateEarthCTA />
+      </div>
+        </div>
+      </section>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2 }}
+        className="bg-[#4793AF] w-full"
+      >
+        <Footer bgColor="#4793AF" />
+      </motion.div>
+    </div>
+  );
+};
+
+export default Ocean;
