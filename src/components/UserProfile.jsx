@@ -11,6 +11,8 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { db, storage } from "../firebase";
+import { signOut } from 'firebase/auth';
+import { auth } from '../firebase';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import {
   UserIcon,
@@ -57,6 +59,12 @@ const UserProfile = ({ user, setUserAvatar }) => {
       fetchUserProfile();
     }
   }, [user?.uid]);
+
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => console.log("Sign Out"))
+      .catch((error) => console.log(error));
+  };
 
   const fetchUserProfile = async () => {
     if (!user?.uid) return;
@@ -279,30 +287,25 @@ const UserProfile = ({ user, setUserAvatar }) => {
                 )}
               </div>
 
-              <div className="grid grid-cols-3 gap-4 py-4 border-y border-gray-100">
-                <div className="text-center">
-                  <div className="font-bold">{postCount}</div>
-                  <div className="text-xs text-gray-600">
-                    Post{postCount === 1 ? "" : "s"}
-                  </div>
+              <div className="flex items-center justify-between gap-4 py-4 border-y border-gray-100">
+                <div className="text-sm font-semibold text-gray-600">
+                  Post{postCount === 1 ? "" : "s"}
                 </div>
-                <div className="text-center">
-                  <div className="font-bold">0</div>
-                  <div className="text-xs text-gray-600">Followers</div>
-                </div>
-                <div className="text-center">
-                  <div className="font-bold">0</div>
-                  <div className="text-xs text-gray-600">Following</div>
-                </div>
+                <div className="font-bold">{postCount}</div>
               </div>
-
-              <button
-                onClick={() => setIsModalOpen(true)}
-                className="w-full mt-4 flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-              >
-                <Edit className="w-4 h-4" />
-                Edit Profile
-              </button>
+              <div className="flex flex-col gap-4">
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className="w-full mt-4 flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  <Edit className="w-4 h-4" />
+                  Edit Profile
+                </button>
+                <button onClick={handleSignOut} className='bg-[#00a96e] w-full flex items-center justify-center gap-2 px-4 py-2 text-white rounded-lg transition-colors'>
+                    <span className='text-white font-bold'>Log Out</span>
+                    <LogOut className="w-4 h-4" />
+                </button>
+              </div>
             </div>
 
             {/* Social Links */}
