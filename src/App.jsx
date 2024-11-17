@@ -54,7 +54,7 @@ function App() {
                   <Route path="/Climate" element={<Climate />} />
                   <Route path="/Deforestation" element={<Deforestation />} />
                   <Route path="/Ocean" element={<Ocean />} />
-                  <Route path="/blog" element={<BlogList />} />
+                  <Route path="/blog" element={<BlogList user={user} />} />
                   <Route path="/create-post" element={<CreatePost user={user} />} />
                   <Route path="/edit/:id" element={<EditPost user={user} />} />
                   <Route path="/dashboard" element={<UserProfile user={user} />} />
