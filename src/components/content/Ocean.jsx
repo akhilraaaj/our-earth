@@ -40,9 +40,7 @@ const Ocean = () => {
                 y2="100%"
                 id="illustration-01"
               >
-                <stop stopColor="#FFF" offset="0%" />
-                <stop stopColor="#EAEAEA" offset="77.402%" />
-                <stop stopColor="#DFDFDF" offset="100%" />
+                <stop stopColor="#C6E7FF" offset="0%" />
               </linearGradient>
             </defs>
             <g fill="url(#illustration-01)" fillRule="evenodd">

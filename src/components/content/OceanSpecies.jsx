@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRightCircle, ArrowLeftCircle, Shield, Globe2, Binary, Weight, Heart, AlertTriangle } from 'lucide-react';
+import { ArrowRightCircle, ArrowLeftCircle, Shield, Globe2, Binary, AlertTriangle } from 'lucide-react';
 import blueWhale from '../../assets/blue-whale.png';
 import vaquita from '../../assets/vaquita.png';
 import seaTurtle from '../../assets/hawksbill-sea-turtle.png';

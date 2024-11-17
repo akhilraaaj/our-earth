@@ -24,8 +24,6 @@ function Navbar({ user, email, userAvatar }) {
       setOpen(!open);
   };
 
-  const firstLetter = email ? email.charAt(0).toUpperCase() : '';
-
   return (
     <div className='px-4'>
     <div className='fixed inset-x-0 top-0 z-50 mx-auto max-w-6xl md:w-[98%] w-full border border-gray-100 bg-white/80 py-2 shadow backdrop-blur-lg md:top-6 md:rounded-3xl'>

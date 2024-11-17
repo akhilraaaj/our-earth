@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -5,21 +6,13 @@ import {
   getDoc,
   setDoc,
   updateDoc,
-  collection,
-  query,
-  where,
-  getDocs,
 } from "firebase/firestore";
 import { db, storage } from "../firebase";
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import {
-  UserIcon,
-  Settings,
   Image as ImageIcon,
-  Activity,
-  Bookmark,
   LogOut,
   Loader,
   X,
@@ -229,7 +222,6 @@ const UserProfile = ({ user, setUserAvatar }) => {
       setLoading(false);
     }
   };
-
 
 
   const modalVariants = {
