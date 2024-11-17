@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { fadeIn } from "../../variants";
 import Quiz from "./quiz/Quiz";
 import Testimonials from './Testimonials';
-import ecoFriendlyTravel from '../../assets/eco-friendly-travel.png'
 import SectionCardGrid from "./SectionCardGrid";
 import { Biome } from "./Biome";
 import DonateEarthCTA from "./Donate";
@@ -12,7 +11,7 @@ import DonateEarthCTA from "./Donate";
 const Section = () => {
   return (
     <div className="flex items-center justify-center bg-white w-full ">
-      <div className=" text-center flex flex-col px-6 md:px-0 py-32 container mx-auto text-center flex flex-col items-center justify-center sm:justify-normal md:justify-center px-6 md:px-0 md:max-w-[1300px] md:w-11/12 xl:w-[1300px] 2xl:w-[1300px] max-w-[1300px] relative">
+      <div className="py-32 container mx-auto text-center flex flex-col items-center justify-center sm:justify-normal md:justify-center px-6 md:px-0 md:max-w-[1300px] md:w-11/12 xl:w-[1300px] 2xl:w-[1300px] max-w-[1300px] relative">
         <div className="flex items-center justify-between bg-[#12486B] rounded-2xl shadow-2xl p-12 md:text-left text-center">
           <div className="flex flex-col justify-center w-full px-8">
             <motion.div

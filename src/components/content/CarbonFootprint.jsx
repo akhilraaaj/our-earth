@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { 
-  Car, Home, Plane, ShoppingBag, Leaf, Info,
-  Utensils, Train, Bus, Lightbulb, Droplets,
+  Car, Home, Plane, Leaf, Info,
+  Utensils, Bus, Lightbulb, Droplets,
   ThermometerSun, Shirt, Package
 } from 'lucide-react';
 import { motion } from 'framer-motion';

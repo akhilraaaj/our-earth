@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, CircleMarker, Popup, useMap } from 'react-leaflet';
-import { Loader2, AlertTriangle, MapPin, Calendar, Info } from 'lucide-react';
+import { AlertTriangle, MapPin, Calendar, Info } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // MapBoundaries component remains the same
@@ -129,24 +129,16 @@ const NasaWildfireMap = () => {
 
   if (loading) {
     return (
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="flex flex-col items-center justify-center h-96 bg-gray-50 rounded-lg"
-      >
-        <Loader2 className="w-12 h-12 animate-spin text-blue-500 mb-4" />
-        <motion.p 
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="text-lg text-gray-600"
-        >
-          Loading wildfire data...
-        </motion.p>
-      </motion.div>
+      <div className="max-w-4xl mx-auto p-6 text-center">
+        <div className="animate-pulse space-y-4">
+          <div className="h-8 bg-gray-200 rounded w-1/4 mx-auto"></div>
+          <div className="h-48 bg-gray-200 rounded"></div>
+          <div className="h-48 bg-gray-200 rounded"></div>
+        </div>
+      </div>
     );
   }
-
+  
   if (error) {
     return (
       <motion.div 
