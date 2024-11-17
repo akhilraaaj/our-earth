@@ -30,14 +30,35 @@ export default function OceanStories() {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
-      className="py-16 md:py-24 px-4 md:px-4"
+      className="py-16 px-4 md:px-4"
     >
-      <motion.h1 
-        variants={fadeInUp}
-        className="text-4xl md:text-5xl lg:text-6xl font-bold text-center bg-gradient-to-r from-blue-600 to-teal-400 bg-clip-text text-transparent mb-12 md:mb-16"
-      >
-        Ocean Conservation Success Stories
-      </motion.h1>
+      <motion.div
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              className="text-center mb-16"
+            >
+              <div className="flex flex-col items-center justify-center mb-4">
+                <div className="inline-block px-3 py-2 text-sm font-semibold text-white rounded-lg text-cn bg-blue-900 hover:cursor-pointer hover:bg-opacity-90">
+                  Protect Our Oceans
+                </div>
+                <motion.h1
+                  className="text-5xl font-bold text-center mt-4 mb-8 text-green-800"
+                  initial={{ opacity: 0, y: -50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, ease: "easeOut" }}
+                >
+                  Stories of Hope and Conservation
+                </motion.h1>
+                <motion.p
+                  className="text-2xl text-center text-green-700 font-semibold"
+                  initial={{ opacity: 0, y: -30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, delay: 0.2 }}
+                >
+                  Inspiring Efforts to Save Marine Ecosystems
+                </motion.p>
+              </div>
+            </motion.div>
 
       <div className='container mx-auto max-w-7xl'>
         <motion.div 
