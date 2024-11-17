@@ -16,6 +16,8 @@ body,
   background-image: url("/public/Sprinkle.svg");
   background-size: cover;
   background-position: center;
+  width: 100%;
+  height: 100%;
 }
 
 .perks-card {

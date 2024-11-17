@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from './firebase';
+import { auth, db } from './firebase';
+import { doc, getDoc } from 'firebase/firestore';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { Login } from './components/Login';
 import TopSection from './components/TopSection';
@@ -22,12 +23,21 @@ function App() {
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState(null);
   const [isFetching, setIsFetching] = useState(true);
+  const [userAvatar, setUserAvatar] = useState('');
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setUser(user);
       if (user) {
         setEmail(user.email);
+        try {
+          const userDoc = await getDoc(doc(db, "users", user.uid));
+          if (userDoc.exists() && userDoc.data().profilePic) {
+            setUserAvatar(userDoc.data().profilePic);
+          }
+        } catch (error) {
+          console.error("Error fetching initial avatar:", error);
+        }
       }
       setIsFetching(false);
     });
@@ -48,7 +58,7 @@ function App() {
             <Route path="*" element={<Page404 />} />
             <Route path="/home/*" element={
               <ProtectedRoute user={user}>
-                <Navbar user={user} email={email} />
+                <Navbar user={user} email={email} userAvatar={userAvatar} />
                 <Routes>
                   <Route path="/" element={<Landing />} />
                   <Route path="/Climate" element={<Climate />} />
@@ -57,7 +67,7 @@ function App() {
                   <Route path="/blog" element={<BlogList user={user} />} />
                   <Route path="/create-post" element={<CreatePost user={user} />} />
                   <Route path="/edit/:id" element={<EditPost user={user} />} />
-                  <Route path="/dashboard" element={<UserProfile user={user} />} />
+                  <Route path="/dashboard" element={<UserProfile user={user} setUserAvatar={setUserAvatar} />} />
                   <Route path="*" element={<Page404 />} />
                 </Routes>
               </ProtectedRoute>

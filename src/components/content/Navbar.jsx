@@ -4,7 +4,7 @@ import { Bars3BottomRightIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../firebase';
 
-function Navbar({ user, email }) {
+function Navbar({ user, email, userAvatar }) {
   let Links = [
     { name: "CLIMATE CHANGE", link: "/home/climate" },
     { name: "PLANT TREES", link: "/home/deforestation" },
@@ -53,10 +53,20 @@ function Navbar({ user, email }) {
           </li>
           <li className="dropdown dropdown-bottom dropdown-end hidden md:block">
             <div tabIndex={0} role="button">
-              <div className="avatar online placeholder ml-4">
-                <div className="rounded-full w-10 bg-[#2C7865] flex justify-center items-center p-4">
-                  <span className="text-2xl font-bold text-white">{firstLetter}</span>
-                </div>
+              <div className="online placeholder ml-4">
+                {userAvatar ? (
+                    <img 
+                      src={userAvatar} 
+                      alt="Profile" 
+                      className="w-12 rounded-full object-cover"
+                    />
+                  ) : (
+                    <img 
+                      src="https://cdn-icons-png.flaticon.com/128/4140/4140061.png" 
+                      alt="Profile" 
+                      className="w-12 rounded-full object-cover"
+                    />
+                  )}
               </div>
             </div>
             <ul tabIndex={0} className="dropdown-content z-[1] w-64 menu px-2 py-3 shadow bg-gray-100 mt-2 rounded-box hidden md:block">

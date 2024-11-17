@@ -71,7 +71,7 @@ export const Login = ({ user }) => {
         console.log(user);
       })
       .catch((error) => {
-        setError(error); 
+        setError(error.message); 
       });
   };
 
