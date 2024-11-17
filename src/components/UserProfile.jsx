@@ -5,13 +5,16 @@ import { db, storage } from '../firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { 
   UserIcon, 
-  SettingsIcon, 
-  ImageIcon, 
-  ActivityIcon,
-  BookmarkIcon,
-  LogOutIcon,
-  Loader
+  Settings, 
+  Image as ImageIcon, 
+  Activity,
+  Bookmark,
+  LogOut,
+  Loader,
+  X,
+  Edit
 } from 'lucide-react';
+import MyPosts from './MyPosts';
 
 const stockAvatars = [
   '/api/placeholder/128/128',
@@ -33,12 +36,13 @@ const UserProfile = ({ user }) => {
     followers: 0,
     following: 0
   });
-  const [activeTab, setActiveTab] = useState('edit');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [selectedAvatar, setSelectedAvatar] = useState(null);
   const [customImage, setCustomImage] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [postCount, setPostCount] = useState(0);
 
   useEffect(() => {
     fetchUserProfile();
@@ -71,8 +75,6 @@ const UserProfile = ({ user }) => {
       
       setStats({
         posts: postsSnapshot.size,
-        followers: Math.floor(Math.random() * 100),
-        following: Math.floor(Math.random() * 50)
       });
     } catch (err) {
       console.error('Error fetching stats:', err);
@@ -147,106 +149,178 @@ const UserProfile = ({ user }) => {
     } finally {
         setLoading(false);
     }
-};
-
-
-  const containerVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
-    }
   };
 
-  const cardVariants = {
+  const modalVariants = {
     hidden: { opacity: 0, scale: 0.95 },
-    visible: {
-      opacity: 1,
+    visible: { 
+      opacity: 1, 
       scale: 1,
-      transition: { duration: 0.4, ease: "easeOut" }
+      transition: { type: "spring", duration: 0.3 }
+    },
+    exit: { 
+      opacity: 0, 
+      scale: 0.95,
+      transition: { duration: 0.2 }
     }
   };
 
   return (
-    <motion.div 
-      className="max-w-7xl mx-auto px-4 py-8 mt-20"
-      initial="hidden"
-      animate="visible"
-      variants={containerVariants}
-    >
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Profile Card */}
-        <motion.div variants={cardVariants} className="md:col-span-1">
+    <div className="max-w-7xl mx-auto px-4 py-8 mt-20">
+      <div className="grid grid-cols-12 gap-6">
+        {/* Left Sidebar - Dashboard */}
+        <motion.div 
+          className="col-span-3 space-y-6"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          {/* Profile Card */}
           <div className="bg-white rounded-lg shadow-lg p-6">
             <div className="flex flex-col items-center">
-              <motion.div 
-                className="relative w-32 h-32 mb-4"
-                whileHover={{ scale: 1.05 }}
-              >
+              <div className="relative w-32 h-32 mb-4">
                 <img
-                  src={previewImage || profileData.photoURL}
+                  src={profileData.photoURL}
                   alt="Profile"
                   className="w-full h-full rounded-full object-cover border-4 border-white shadow-lg"
                 />
-                <motion.div 
-                  className="absolute bottom-0 right-0 bg-white p-2 rounded-full shadow-lg cursor-pointer"
-                  whileHover={{ scale: 1.1 }}
-                >
-                  <ImageIcon className="w-5 h-5 text-gray-600" />
-                </motion.div>
-              </motion.div>
+              </div>
               <h2 className="text-xl font-bold mb-1">{profileData.displayName}</h2>
-              <p className="text-gray-600 text-sm mb-4">{user.email}</p>
-              
-              <div className="grid grid-cols-3 gap-4 w-full mb-6">
-                <div className="text-center">
-                  <div className="font-bold">{stats.posts}</div>
-                  <div className="text-sm text-gray-600">Posts</div>
-                </div>
-                <div className="text-center">
-                  <div className="font-bold">{stats.followers}</div>
-                  <div className="text-sm text-gray-600">Followers</div>
-                </div>
-                <div className="text-center">
-                  <div className="font-bold">{stats.following}</div>
-                  <div className="text-sm text-gray-600">Following</div>
-                </div>
+              <p className="text-gray-600 text-sm mb-2">{user.email}</p>
+              {profileData.bio && (
+                <p className="text-gray-700 text-sm text-center mb-4">{profileData.bio}</p>
+              )}
+              {profileData.location && (
+                <p className="text-gray-600 text-sm mb-4">
+                  📍 {profileData.location}
+                </p>
+              )}
+            </div>
+
+            <div className="grid grid-cols-3 gap-4 py-4 border-y border-gray-100">
+              <div className="text-center">
+                <div className="font-bold">{postCount}</div>
+                <div className="text-xs text-gray-600">Post{postCount === 1 ? '' : 's'}</div>
+              </div>
+              <div className="text-center">
+                <div className="font-bold">0</div>
+                <div className="text-xs text-gray-600">Followers</div>
+              </div>
+              <div className="text-center">
+                <div className="font-bold">0</div>
+                <div className="text-xs text-gray-600">Following</div>
               </div>
             </div>
+
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="w-full mt-4 flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              <Edit className="w-4 h-4" />
+              Edit Profile
+            </button>
           </div>
+
+          {/* Social Links */}
+          {Object.entries(profileData.social).some(([_, value]) => value) && (
+            <div className="bg-white rounded-lg shadow-lg p-6">
+              <h3 className="font-semibold mb-4">Social Links</h3>
+              <div className="space-y-3">
+                {Object.entries(profileData.social).map(([platform, value]) => (
+                  value && (
+                    <a
+                      key={platform}
+                      href={value}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center text-gray-600 hover:text-blue-600 transition-colors"
+                    >
+                      <span className="capitalize">{platform}</span>
+                    </a>
+                  )
+                ))}
+              </div>
+            </div>
+          )}
         </motion.div>
 
-        {/* Main Content Area */}
-        <motion.div variants={cardVariants} className="md:col-span-2">
-          {/* Custom Tabs */}
-          <div className="flex mb-4 bg-gray-100 rounded-lg p-1">
-            {['edit', 'avatar', 'settings'].map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors duration-200 ${
-                  activeTab === tab
-                    ? 'bg-white text-blue-600 shadow-sm'
-                    : 'text-gray-600 hover:text-gray-900'
-                }`}
-              >
-                {tab.charAt(0).toUpperCase() + tab.slice(1)}
-              </button>
-            ))}
-          </div>
+        {/* Right Side - Posts */}
+        <motion.div 
+          className="col-span-9"
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <MyPosts user={user} setPostCount={setPostCount} />
+        </motion.div>
+      </div>
 
-          {/* Tab Content */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeTab}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
-              className="bg-white rounded-lg shadow-lg p-6"
+      {/* Edit Profile Modal */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <motion.div 
+              className="bg-white rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+              variants={modalVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
             >
-              {activeTab === 'edit' && (
+              <div className="p-6 border-b border-gray-200">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-xl font-bold">Edit Profile</h2>
+                  <button
+                    onClick={() => setIsModalOpen(false)}
+                    className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+
+              <div className="p-6 space-y-6">
+                {/* Avatar Section */}
+                <div className="space-y-4">
+                  <h3 className="font-semibold">Profile Picture</h3>
+                  <div className="grid grid-cols-4 gap-4">
+                    {stockAvatars.map((avatar, index) => (
+                      <motion.div
+                        key={index}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="cursor-pointer"
+                      >
+                        <img
+                          src={avatar}
+                          alt={`Avatar ${index + 1}`}
+                          className={`w-full rounded-lg border-2 ${
+                            selectedAvatar === avatar ? 'border-blue-500' : 'border-transparent'
+                          }`}
+                          onClick={() => handleAvatarSelect(avatar)}
+                        />
+                      </motion.div>
+                    ))}
+                  </div>
+                  
+                  <div className="flex items-center justify-center w-full">
+                    <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                      <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                        <ImageIcon className="w-8 h-8 mb-4 text-gray-500" />
+                        <p className="mb-2 text-sm text-gray-500">
+                          <span className="font-semibold">Click to upload</span> or drag and drop
+                        </p>
+                      </div>
+                      <input
+                        type="file"
+                        className="hidden"
+                        onChange={handleImageSelect}
+                        accept="image/*"
+                      />
+                    </label>
+                  </div>
+                </div>
+
+                {/* Profile Information */}
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -290,52 +364,8 @@ const UserProfile = ({ user }) => {
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
-                </div>
-              )}
 
-              {activeTab === 'avatar' && (
-                <div className="space-y-6">
-                  <div className="grid grid-cols-4 gap-4">
-                    {stockAvatars.map((avatar, index) => (
-                      <motion.div
-                        key={index}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="cursor-pointer"
-                      >
-                        <img
-                          src={avatar}
-                          alt={`Avatar ${index + 1}`}
-                          className={`w-full rounded-lg border-2 ${
-                            selectedAvatar === avatar ? 'border-blue-500' : 'border-transparent'
-                          }`}
-                          onClick={() => handleAvatarSelect(avatar)}
-                        />
-                      </motion.div>
-                    ))}
-                  </div>
-                  
-                  <div className="flex items-center justify-center w-full">
-                    <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
-                      <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                        <ImageIcon className="w-8 h-8 mb-4 text-gray-500" />
-                        <p className="mb-2 text-sm text-gray-500">
-                          <span className="font-semibold">Click to upload</span> or drag and drop
-                        </p>
-                      </div>
-                      <input
-                        type="file"
-                        className="hidden"
-                        onChange={handleImageSelect}
-                        accept="image/*"
-                      />
-                    </label>
-                  </div>
-                </div>
-              )}
-
-              {activeTab === 'settings' && (
-                <div className="space-y-4">
+                  {/* Social Links */}
                   {Object.entries(profileData.social).map(([platform, value]) => (
                     <div key={platform}>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -354,50 +384,56 @@ const UserProfile = ({ user }) => {
                     </div>
                   ))}
                 </div>
-              )}
-            </motion.div>
-          </AnimatePresence>
+              </div>
 
-          {error && (
-            <div className="mt-4 p-4 bg-red-50 border border-red-200 text-red-600 rounded-lg">
-              {error}
-            </div>
-          )}
-
-          <div className="mt-4 flex justify-end gap-4">
-            <button
-              onClick={() => {
-                setCustomImage(null);
-                setSelectedAvatar(null);
-                setPreviewImage(null);
-                fetchUserProfile();
-              }}
-              className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
-            >
-              Cancel
-            </button>
-            <button
-              onClick={handleProfileUpdate}
-              disabled={loading}
-              className={`px-4 py-2 rounded-lg text-white transition-colors ${
-                loading 
-                  ? 'bg-blue-400 cursor-not-allowed' 
-                  : 'bg-blue-600 hover:bg-blue-700'
-              }`}
-            >
-              {loading ? (
-                <div className="flex items-center">
-                  <Loader className="w-4 h-4 mr-2 animate-spin" />
-                  Saving...
+              {error && (
+                <div className="px-6 pb-4">
+                  <div className="p-4 bg-red-50 border border-red-200 text-red-600 rounded-lg">
+                    {error}
+                  </div>
                 </div>
-              ) : (
-                'Save Changes'
               )}
-            </button>
+
+              <div className="p-6 border-t border-gray-200 flex justify-end gap-4">
+                <button
+                  onClick={() => {
+                    setCustomImage(null);
+                    setSelectedAvatar(null);
+                    setPreviewImage(null);
+                    setIsModalOpen(false);
+                    fetchUserProfile();
+                  }}
+                  className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={async () => {
+                    await handleProfileUpdate();
+                    setIsModalOpen(false);
+                  }}
+                  disabled={loading}
+                  className={`px-4 py-2 rounded-lg text-white transition-colors ${
+                    loading 
+                      ? 'bg-blue-400 cursor-not-allowed' 
+                      : 'bg-blue-600 hover:bg-blue-700'
+                  }`}
+                >
+                  {loading ? (
+                    <div className="flex items-center">
+                      <Loader className="w-4 h-4 mr-2 animate-spin" />
+                      Saving...
+                    </div>
+                  ) : (
+                    'Save Changes'
+                  )}
+                </button>
+              </div>
+            </motion.div>
           </div>
-        </motion.div>
-      </div>
-    </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 };
 

@@ -5,7 +5,7 @@ import { db } from '../firebase';
 import { ChevronDown, ChevronUp, Trash, Edit, Plus } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 
-const MyPosts = ({ user }) => {
+const MyPosts = ({ user, setPostCount }) => {
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState(null);
   const [expandedPosts, setExpandedPosts] = useState({});
@@ -32,6 +32,7 @@ const MyPosts = ({ user }) => {
         });
 
         setPosts(postsList);
+        setPostCount(postsList.length);
       } catch (err) {
         setError(err.message);
         toast.error('Failed to fetch your posts');
@@ -41,7 +42,7 @@ const MyPosts = ({ user }) => {
     };
 
     fetchPosts();
-  }, [user]);
+  }, [user, setPostCount]);
 
   const handleDelete = async (postId, imageUrl) => {
     try {
@@ -124,7 +125,7 @@ const MyPosts = ({ user }) => {
                     >
                       <Trash size={20} />
                     </button>
-                    <Link to={`/home/blog/edit/${post.id}`}>
+                    <Link to={`/home/edit/${post.id}`}>
                       <button 
                         className="p-2 text-yellow-500 hover:bg-yellow-50 rounded-full transition-colors duration-300"
                         title="Edit post"

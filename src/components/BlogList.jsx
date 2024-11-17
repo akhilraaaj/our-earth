@@ -135,7 +135,7 @@ const BlogList = ({ user, showOnlyUserPosts = false }) => {
                       >
                         <Trash size={20} />
                       </button>
-                      <Link to={`/home/blog/edit/${post.id}`}>
+                      <Link to={`/home/edit/${post.id}`}>
                         <button 
                           className="p-2 text-yellow-500 hover:bg-yellow-50 rounded-full transition-colors duration-300"
                           title="Edit post"
