@@ -15,6 +15,16 @@ const fadeIn = {
 };
 
 const Ocean = () => {
+  const scrollToCards = () => {
+    const element = document.getElementById("oceans");
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
+
   return (
     <div className=" bg-blue-50 overflow-x-hidden w-full">
       <section className="relative flex flex-col items-center justify-center w-full">
@@ -84,11 +94,11 @@ const Ocean = () => {
                 transition={{ delay: 0.4, duration: 0.6 }}
                 className="flex flex-wrap gap-4 justify-center"
               >
-                <button className="px-8 py-3 bg-gradient-to-r from-blue-500 to-teal-400 text-white rounded-lg font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200">
+                <button
+                  onClick={scrollToCards}
+                  className="px-8 py-3 bg-gradient-to-r from-blue-500 to-teal-400 text-white rounded-lg font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200"
+                >
                   Learn More
-                </button>
-                <button className="px-8 py-3 border-2 border-blue-500 text-blue-500 rounded-lg font-semibold hover:bg-blue-50 transform hover:-translate-y-1 transition-all duration-200">
-                  Get Involved
                 </button>
               </motion.div>
             </div>
@@ -105,34 +115,36 @@ const Ocean = () => {
                 className="rounded-3xl"
               />
             </motion.div>
-
-            <motion.div
-              initial={{ y: -20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              className="text-center mt-24"
-            >
-              <div className="flex flex-col items-center justify-center mb-4">
-                <div className="inline-block px-3 py-2 text-sm font-semibold text-white rounded-lg text-cn bg-blue-900 hover:cursor-pointer hover:bg-opacity-90">
-                  Endangered Oceans
+            <div id="oceans">
+              <motion.div
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                className="text-center mt-24"
+              >
+                <div className="flex flex-col items-center justify-center mb-4">
+                  <div className="inline-block px-3 py-2 text-sm font-semibold text-white rounded-lg text-cn bg-blue-900 hover:cursor-pointer hover:bg-opacity-90">
+                    Endangered Oceans
+                  </div>
+                  <motion.h1
+                    className="text-5xl font-bold text-center mt-4 mb-8 text-green-800"
+                    initial={{ opacity: 0, y: -50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.7, ease: "easeOut" }}
+                  >
+                    Marine Life in Crisis
+                  </motion.h1>
+                  <motion.p
+                    className="text-2xl text-center text-green-700 font-semibold"
+                    initial={{ opacity: 0, y: -30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.7, delay: 0.2 }}
+                  >
+                    A Look at Species on the Brink of Extinction
+                  </motion.p>
                 </div>
-                <motion.h1
-                  className="text-5xl font-bold text-center mt-4 mb-8 text-green-800"
-                  initial={{ opacity: 0, y: -50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, ease: "easeOut" }}
-                >
-                  Marine Life in Crisis
-                </motion.h1>
-                <motion.p
-                  className="text-2xl text-center text-green-700 font-semibold"
-                  initial={{ opacity: 0, y: -30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: 0.2 }}
-                >
-                  A Look at Species on the Brink of Extinction
-                </motion.p>
-              </div>
-            </motion.div>
+              </motion.div>
+            </div>
+
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}

@@ -1,4 +1,3 @@
-import { CardItem } from './CardItem';
 import { motion } from 'framer-motion';
 import { fadeIn } from '../../variants';
 import { Link } from 'react-router-dom';
@@ -14,7 +13,7 @@ export { CustomButton };
 
 const Cards = () =>{
   return (
-    <div className='flex flex-col items-center justify-center bg-white px-12' name="card">
+    <div  className='flex flex-col items-center justify-center bg-white px-12' name="card">
     <div className=' text-center flex flex-col items-center justify-center sm:justify-normal md:justify-center px-6 md:px-0 md:max-w-[1300px] xl:w-[1300px] 2xl:w-[1300px] max-w-[1300px]'>
       <div className='flex flex-col justify-center items-center  text-center py-4 mt-20'>
         <motion.div 

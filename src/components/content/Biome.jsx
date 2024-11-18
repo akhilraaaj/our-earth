@@ -140,7 +140,7 @@ const MouseImageTrail = ({
         <img
           className="pointer-events-none absolute left-0 top-0 h-48 w-auto rounded-xl border-2 border-gray-300 bg-neutral-900 shadow-md shadow-gray-500 object-cover opacity-0"
           src={img}
-          alt={`Mouse move image ${index}`}
+          alt={`Mouse move ${index}`}
           key={index}
           data-mouse-move-index={index}
         />

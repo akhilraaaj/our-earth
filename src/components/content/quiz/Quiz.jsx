@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle, XCircle, ArrowLeft, ArrowRight, Award, Leaf } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Award } from 'lucide-react';
 import confetti from 'canvas-confetti';
-// import EarthTrivia from '/our-earth/src/assets/earth-trivia.jpg'
 
 const QuizForm = () => {
 
