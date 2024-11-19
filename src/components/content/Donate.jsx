@@ -1,64 +1,134 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { Leaf } from 'lucide-react';
+import { Leaf, Globe, ArrowRight, Droplet, TreePine } from 'lucide-react';
 
-const DonateEarthCTA = () => {
-  const [isHovered, setIsHovered] = useState(false);
-
+const EarthConservationCTA = () => {
   return (
-    <div className="w-full flex items-center justify-center border-green-600 border-4 shadow-2xl shadow-blue-900 rounded-3xl overflow-hidden">
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
+    <div className="relative flex flex-col w-full items-center justify-center text-center mt-12 px-4">
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="bg-blue-950 rounded-lg shadow-xl p-8 w-full flex md:flex-row flex-col gap-8 md:gap-0"
+        className="flex flex-col w-full py-12 justify-center text-center items-center relative bg-[#12372A] border border-green-800/20 rounded-3xl overflow-hidden shadow-xl"
       >
-        <div className='flex flex-col items-center justify-center'>
-        <motion.div
-          animate={{ rotate: isHovered ? 360 : 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-6 flex justify-center"
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-green-900/20 via-green-900/10 to-black/5" />
+
+        {/* Floating Icons with Motion */}
+        <motion.div 
+          animate={{ 
+            y: [0, -10, 10, 0],
+            rotate: [0, 5, -5, 0]
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            repeatType: "mirror"
+          }}
+          className="absolute top-10 left-10 text-green-300/50"
         >
-          <Leaf className="text-green-500" size={48} />
+          <Leaf size={40} />
         </motion.div>
-        <div className='w-3/4'>
-          <h2 className="text-3xl font-extrabold text-center text-white mb-4">Save Our Earth</h2>
-          <p className="text-center text-gray-200 font-medium text-lg leading-8 mb-6">
-            Your contribution can make a difference. Help us protect our planet for future generations.
+
+        <motion.div 
+          animate={{ 
+            y: [0, 15, -15, 0],
+            rotate: [0, -5, 5, 0]
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            repeatType: "mirror"
+          }}
+          className="absolute top-20 right-20 text-green-200/50"
+        >
+          <Globe size={48} />
+        </motion.div>
+
+        {/* Additional Decorative Icons */}
+        <motion.div 
+          animate={{ 
+            scale: [1, 1.1, 1],
+            rotate: [0, 5, -5, 0]
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            repeatType: "mirror"
+          }}
+          className="absolute bottom-10 left-10 text-green-200/50"
+        >
+          <Droplet size={32} />
+        </motion.div>
+
+        <motion.div 
+          animate={{ 
+            scale: [1, 1.05, 1],
+            rotate: [0, -5, 5, 0]
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            repeatType: "mirror"
+          }}
+          className="absolute bottom-20 right-10 text-green-200/50"
+        >
+          <TreePine size={36} />
+        </motion.div>
+
+        {/* Pulsing Globe */}
+        <motion.div 
+          animate={{ scale: [1, 1.1, 1] }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            repeatType: "mirror"
+          }}
+          className="p-3 my-4 bg-green-800/20 rounded-full z-50 relative"
+        >
+          <Globe className="w-10 h-10 text-green-300" />
+        </motion.div>
+
+        {/* Content */}
+        <div className="relative z-10 px-6">
+          <h4 className="mt-2 mb-2 sm:mb-4 text-green-300 font-bold text-xl tracking-wider">
+            PROTECT OUR PLANET
+          </h4>
+
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-green-300 to-green-500 bg-clip-text text-transparent mb-4">
+            ACT NOW FOR TOMORROW
+          </h2>
+
+          <p className="mb-0 mt-4 max-w-2xl mx-auto text-green-100 leading-relaxed">
+            Your contribution today helps protect our planet's future. Every dollar donated goes towards 
+            <span className="font-bold text-green-300"> vital conservation projects </span>
+            that preserve Earth's biodiversity and combat climate change.
           </p>
-          <div className='flex items-center justify-center gap-4 w-full'>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onHoverStart={() => setIsHovered(true)}
-            onHoverEnd={() => setIsHovered(false)}
-            className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg"
-          >
-            Donate Now
-          </motion.button>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onHoverStart={() => setIsHovered(true)}
-            onHoverEnd={() => setIsHovered(false)}
-            className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg"
-          >
-            Donate Now
-          </motion.button>
+
+          <div className="text-center mt-20 flex items-center justify-center sm:flex-row flex-col gap-4 mb-20 w-full max-w-2xl mx-auto">
+            <motion.a 
+              href="#donateNow" 
+              className="inline-block w-full group"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <button 
+                type="button" 
+                className="flex items-center justify-center gap-3 px-6 w-full h-[46px] bg-green-600 hover:bg-green-700 text-white rounded-lg transition-all duration-300 shadow-lg hover:shadow-green-700/25"
+              >
+                <span className="font-semibold">Donate Now</span>
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </motion.a>
           </div>
         </div>
-        </div>
-        <div className="mockup-phone -mb-32">
-          <div className="camera"></div>
-          <div className="display ">
-            <div className="artboard relative artboard-demo phone-1 bg-[url('https://goodwillsp.org/wp-content/uploads/2015/04/ThinkstockPhotos-479711637.jpg')] bg-cover bg-center bg-no-repeat">
-              <h4 className='text-slate-900 absolute top-16 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-extrabold text-lg'>We only have one planet, DONATE!!</h4>
-            </div>
-        </div>
-</div>
+
+        {/* Decorative Curves */}
+        <div className="w-[1400px] h-[900px] bg-[#16423C] rounded-full rounded-bl-[80%] rounded-br-[80%] absolute -bottom-[75%]" />
+        <div className="w-[1000px] h-[880px] bg-[#145046] rounded-full rounded-bl-[80%] rounded-br-[80%] absolute -bottom-[100%]" />
       </motion.div>
     </div>
   );
 };
 
-export default DonateEarthCTA;
+export default EarthConservationCTA;

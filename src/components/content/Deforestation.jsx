@@ -182,11 +182,7 @@ const Deforestation = () => {
               </div>
             </motion.div>
             <div className="flex md:flex-row flex-col items-center justify-between md:px-8 px-4 pt-4 pb-12 md:text-left text-center">
-              <motion.div 
-              variants={fadeIn("right", 0.1)}
-              initial="hidden"
-              whileInView={"show"}
-              viewport={{ once: false, amount: 0.7 }}
+              <div 
               className="flex flex-col justify-center w-full">
                 <h1 className="md:text-5xl text-3xl font-extrabold text-green-900 mb-8">
                   Why Plant Trees?
@@ -207,7 +203,7 @@ const Deforestation = () => {
                   25% of all medicines. Have you ever taken an Aspirin? It comes
                   from the bark of a tree!
                 </p>
-              </motion.div>
+              </div>
               <img src={greenMap} className="w-full" alt="" />
             </div>
           </div>
