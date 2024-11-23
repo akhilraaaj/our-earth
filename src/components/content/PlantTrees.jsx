@@ -127,7 +127,7 @@ const PlantTrees = () => {
                 transition={{ delay: 0.4, duration: 0.6 }}
                 className="indicator mt-10"
               >
-                <span className="indicator-item badge badge-primary">
+                <span className="indicator-item bg-white text-xs font-medium px-1.5 py-0.5 rounded-full">
                   cc: Earthdaynetwork
                 </span>
                 <button
