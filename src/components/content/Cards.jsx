@@ -58,7 +58,7 @@ const Cards = () => {
             variants={fadeIn("up", 0.1)}
             initial="hidden"
             whileInView={"show"}
-            viewport={{ once: false, amount: 0.4 }}
+            viewport={{ once: false, amount: 0.2 }}
           >
             <div
               className="card bg-base-100 w-96 shadow-xl"
@@ -94,7 +94,7 @@ const Cards = () => {
             variants={fadeIn("up", 0.1)}
             initial="hidden"
             whileInView={"show"}
-            viewport={{ once: false, amount: 0.2 }}
+            viewport={{ once: false, amount: 0.4 }}
           >
             <div
               className="card bg-base-100 w-96 shadow-xl"
