@@ -266,21 +266,21 @@ const UserProfile = ({ user, setUserAvatar }) => {
                 <h2 className="text-xl font-bold mb-1">
                   {profileData.displayName}
                 </h2>
-                <p className="text-gray-600 text-sm mb-2">{user.email}</p>
+                <p className="text-gray-600 font-semibold text-md mb-2">{user.email}</p>
                 {profileData.bio && (
-                  <p className="text-gray-700 text-sm text-center mb-4">
+                  <p className="text-gray-700 text-md text-center mb-4">
                     {profileData.bio}
                   </p>
                 )}
                 {profileData.location && (
-                  <p className="text-gray-600 text-sm mb-4">
+                  <p className="text-gray-600 text-md mb-4">
                     📍 {profileData.location}
                   </p>
                 )}
               </div>
 
               <div className="flex items-center justify-between gap-4 py-4 border-y border-gray-100">
-                <div className="text-sm font-semibold text-gray-600">
+                <div className="text-base font-bold text-gray-600">
                   Post{postCount === 1 ? "" : "s"}
                 </div>
                 <div className="font-bold">{postCount}</div>
@@ -288,7 +288,7 @@ const UserProfile = ({ user, setUserAvatar }) => {
               <div className="flex flex-col gap-4">
                 <button
                   onClick={() => setIsModalOpen(true)}
-                  className="w-full mt-4 flex items-center justify-center gap-2 px-4 py-2 bg-slate-800 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  className="w-full mt-4 flex items-center justify-center gap-2 px-4 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors"
                 >
                   <Edit className="w-4 h-4" />
                   Edit Profile
@@ -303,7 +303,7 @@ const UserProfile = ({ user, setUserAvatar }) => {
             {/* Social Links */}
             {Object.entries(profileData.social).some(([_, value]) => value) && (
               <div className="bg-white/90 rounded-lg shadow-lg p-6">
-                <h3 className="font-semibold mb-4">Social Links</h3>
+                <h3 className="font-bold text-lg mb-4">Social Links</h3>
                 <div className="space-y-3">
                   {Object.entries(profileData.social).map(
                     ([platform, value]) =>
@@ -313,7 +313,7 @@ const UserProfile = ({ user, setUserAvatar }) => {
                           href={value}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center text-gray-600 hover:text-blue-600 transition-colors"
+                          className="flex items-center font-semibold text-slate-800 hover:text-slate-700 transition-colors"
                         >
                           <span className="capitalize">{platform}</span>
                         </a>
