@@ -16,16 +16,18 @@ import {
 } from "lucide-react";
 import MyPosts from "./MyPosts";
 import Footer from "./content/Footer";
+import user1 from '/our-earth/src/assets/avatars/male-1.svg';
+import user2 from '/our-earth/src/assets/avatars/male-2.svg';
+import user3 from '/our-earth/src/assets/avatars/female-1.svg';
+import user4 from '/our-earth/src/assets/avatars/female-2.svg';
+
 
 const stockAvatars = [
-  "https://cdn-icons-png.flaticon.com/128/4140/4140061.png",
-  "https://cdn-icons-png.flaticon.com/128/921/921124.png",
-  "/api/placeholder/128/128",
-  "/api/placeholder/128/128",
+  user1, user2, user3, user4,
 ];
 
 const DEFAULT_AVATAR =
-  "https://cdn-icons-png.flaticon.com/128/4140/4140061.png";
+  user1;
 
 const UserProfile = ({ user, setUserAvatar }) => {
   const [profileData, setProfileData] = useState({

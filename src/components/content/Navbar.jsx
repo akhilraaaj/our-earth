@@ -4,6 +4,7 @@ import { Bars3BottomRightIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 import { LogOut, Layout } from "lucide-react";
+import user1 from '/our-earth/src/assets/avatars/male-1.svg';
 
 function Navbar({ user, email, userAvatar }) {
   let Links = [
@@ -89,7 +90,7 @@ function Navbar({ user, email, userAvatar }) {
                     />
                   ) : (
                     <img
-                      src="https://cdn-icons-png.flaticon.com/128/4140/4140061.png"
+                      src={user1}
                       alt="Profile"
                       className="w-12 rounded-full object-cover"
                     />
@@ -110,10 +111,10 @@ function Navbar({ user, email, userAvatar }) {
                 <li className="px-2 py-2 hover:bg-gray-50">
                   <Link
                     to="/home/dashboard"
-                    className="flex hover:bg-transparent active:bg-transparent items-center gap-3"
+                    className="flex hover:bg-transparent !active:bg-transparent items-center gap-3"
                   >
                     <Layout className="w-5 h-5 text-gray-600" />
-                    <span className="text-sm font-medium text-gray-700 active:text-gray-200 active:bg-transparent">
+                    <span className="text-sm font-medium text-gray-700 active:text-gray-200 !active:bg-transparent">
                       User Dashboard
                     </span>
                   </Link>
