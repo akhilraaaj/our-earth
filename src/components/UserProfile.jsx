@@ -240,7 +240,7 @@ const UserProfile = ({ user, setUserAvatar }) => {
         <div className="grid grid-cols-12 gap-6">
           {/* Left Sidebar - Dashboard */}
           <motion.div
-            className="col-span-3 space-y-6"
+            className="lg:col-span-3 col-span-12 space-y-6"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
@@ -327,7 +327,7 @@ const UserProfile = ({ user, setUserAvatar }) => {
 
           {/* Right Side - Posts */}
           <motion.div
-            className="col-span-9"
+            className="lg:col-span-9 col-span-12"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
