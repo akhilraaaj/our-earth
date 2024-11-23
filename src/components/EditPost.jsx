@@ -142,7 +142,7 @@ const EditPost = () => {
             <motion.h1
               initial={{ y: -20 }}
               animate={{ y: 0 }}
-              className="text-3xl font-extrabold text-gray-900 text-center mb-8"
+              className="text-3xl font-extrabold text-gray-900 text-center mb-2"
             >
               Edit Post
             </motion.h1>
