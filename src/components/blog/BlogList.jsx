@@ -86,11 +86,13 @@ const BlogList = ({ user, showOnlyUserPosts = false }) => {
 
   if (loading) {
     return (
-      <div className="max-w-4xl mx-auto p-6 text-center">
-        <div className="animate-pulse space-y-4">
-          <div className="h-8 bg-gray-200 rounded w-1/4 mx-auto"></div>
-          <div className="h-48 bg-gray-200 rounded"></div>
-          <div className="h-48 bg-gray-200 rounded"></div>
+      <div className="overflow-x-hidden min-h-screen bg-pattern">
+        <div className="max-w-4xl mx-auto mt-28 p-6 text-center">
+          <div className="animate-pulse space-y-4">
+            <div className="h-8 bg-gray-200 rounded w-1/4 mx-auto"></div>
+            <div className="h-48 bg-gray-200 rounded"></div>
+            <div className="h-48 bg-gray-200 rounded"></div>
+          </div>
         </div>
       </div>
     );
