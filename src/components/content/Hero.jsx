@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { fadeIn } from "../../variants";
 
-const Home = () => {
+const Hero = () => {
   const scrollToCards = () => {
     const element = document.getElementById("cards-section");
     if (element) {
@@ -38,7 +38,7 @@ const Home = () => {
           </h2>
           <button
             onClick={scrollToCards}
-            className="overflow-hidden relative w-60 p-2 h-12 bg-transparent text-green-100 border border-green-100 rounded-md text-xl font-bold cursor-pointer relative z-10 group"
+            className="overflow-hidden relative w-60 p-2 h-12 bg-transparent text-green-100 border border-green-100 rounded-md text-xl font-bold cursor-pointer z-10 group"
           >
             SAVE EARTH!
             <span className="absolute w-64 h-32 -top-8 -left-2 bg-green-200 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-500 duration-1000 origin-bottom"></span>
@@ -48,11 +48,10 @@ const Home = () => {
               SAVE OURSELVES!
             </span>
           </button>
-          {/* <button className='text-[#F9F3CC] rounded-md btn-lg font-extrabold p-4 hover:bg-green-300 hover:text-black'>SAVE EARTH, SAVE OURSELVES</button> */}
         </motion.div>
       </div>
     </div>
   );
 };
 
-export default Home;
+export default Hero;

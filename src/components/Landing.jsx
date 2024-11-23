@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import Home from './content/Home';
+import Home from './content/Hero';
 import Card from './content/Cards';
-import Footer from './content/Footer';
+import Footer from './Footer';
 import Section  from './content/Section';
 
 const Landing = () => {

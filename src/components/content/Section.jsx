@@ -5,7 +5,7 @@ import Quiz from "./quiz/Quiz";
 import Testimonials from './Testimonials';
 import SectionCardGrid from "./SectionCardGrid";
 import { Biome } from "./Biome";
-import DonateEarthCTA from "./Donate";
+import DonateEarthCTA from "./DonateCTA";
 
 
 const Section = () => {

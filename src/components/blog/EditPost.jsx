@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useParams, useNavigate } from "react-router-dom";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { db, storage, ref, uploadBytes, getDownloadURL } from "../firebase";
+import { db, storage, ref, uploadBytes, getDownloadURL } from "../../firebase";
 import { Camera, Loader2, X, ArrowLeft, Save } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
-import Footer from "./content/Footer";
+import Footer from "../Footer";
 
 const EditPost = () => {
   const { id } = useParams();

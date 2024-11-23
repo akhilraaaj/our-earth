@@ -8,10 +8,10 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../../firebase";
 import { ChevronDown, ChevronUp, Trash, Edit, Plus } from "lucide-react";
 import toast from "react-hot-toast";
-import Footer from "./content/Footer";
+import Footer from "../Footer";
 
 const BlogList = ({ user, showOnlyUserPosts = false }) => {
   const [posts, setPosts] = useState([]);

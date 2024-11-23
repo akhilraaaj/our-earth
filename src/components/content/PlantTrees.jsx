@@ -1,10 +1,10 @@
 import React from "react";
-import Footer from "./Footer";
-import NasaWildfireMap from "../Wildfire";
+import Footer from "../Footer";
+import NasaWildfireMap from "./Wildfire";
 import { motion } from "framer-motion";
 import greenMap from "../../assets/green-map.png";
 import DetailedCarbonCalculator from "./CarbonFootprint";
-import EarthConservationCTA from "./Donate";
+import EarthConservationCTA from "./DonateCTA";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -15,7 +15,7 @@ const fadeIn = {
   },
 };
 
-const Deforestation = () => {
+const PlantTrees = () => {
   const downloadPDF = () => {
     const pdfUrl = "/trees.pdf";
 
@@ -259,4 +259,4 @@ const Deforestation = () => {
   );
 };
 
-export default Deforestation;
+export default PlantTrees;

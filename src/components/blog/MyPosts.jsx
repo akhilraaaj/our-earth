@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { collection, getDocs, deleteDoc, doc, query, where } from 'firebase/firestore';
-import { db } from '../firebase';
+import { db } from '../../firebase';
 import { ChevronDown, ChevronUp, Trash, Edit, Plus } from 'lucide-react';
 import toast from 'react-hot-toast';
 

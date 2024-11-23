@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { collection, addDoc } from "firebase/firestore";
-import { db, storage } from "../firebase";
+import { db, storage } from "../../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { Camera, Loader2, X } from "lucide-react";
-import Footer from "./content/Footer";
+import Footer from "../Footer";
 
 const CreatePost = ({ user }) => {
   const [title, setTitle] = useState("");

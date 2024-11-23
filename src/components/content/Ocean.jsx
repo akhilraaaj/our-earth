@@ -1,9 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
-import Footer from "./Footer";
+import Footer from "../Footer";
 import CoralReef3D from "./OceanSpecies";
 import OceanViewer from "./MarineSuccessStories";
-import EarthConservationCTA from "./Donate";
+import EarthConservationCTA from "./DonateCTA";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },

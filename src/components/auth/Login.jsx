@@ -10,7 +10,7 @@ import {
   GoogleAuthProvider
 } from "firebase/auth";
 
-import { auth } from "../firebase";
+import { auth } from "../../firebase";
 
 export const Login = ({ user }) => {
   const [email, setEmail] = useState("");

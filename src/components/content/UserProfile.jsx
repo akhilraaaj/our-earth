@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
-import { db, storage } from "../firebase";
+import { db, storage } from "../../firebase";
 import { signOut } from "firebase/auth";
-import { auth } from "../firebase";
+import { auth } from "../../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import {
   Image as ImageIcon,
@@ -14,8 +14,8 @@ import {
   Edit,
   Trash2,
 } from "lucide-react";
-import MyPosts from "./MyPosts";
-import Footer from "./content/Footer";
+import MyPosts from "../blog/MyPosts";
+import Footer from "../Footer";
 import user1 from '/our-earth/src/assets/avatars/male-1.svg';
 import user2 from '/our-earth/src/assets/avatars/male-2.svg';
 import user3 from '/our-earth/src/assets/avatars/female-1.svg';

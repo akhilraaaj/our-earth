@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { csv } from "d3-fetch";
 import { scaleLinear } from "d3-scale";
 import { motion } from "framer-motion";
-import Footer from "./Footer";
+import Footer from "../Footer";
 import { Info } from "lucide-react";
 import {
   ComposableMap,
@@ -12,7 +12,7 @@ import {
   Graticule,
 } from "react-simple-maps";
 import BeforeAfterSlider from "./ImageSlider";
-import EarthConservationCTA from "./Donate";
+import EarthConservationCTA from "./DonateCTA";
 
 const geoUrl = "/features.json";
 
