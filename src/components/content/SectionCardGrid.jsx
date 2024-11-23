@@ -128,29 +128,6 @@ const BentoCard = ({ icon: Icon, title, description, bgColor, pattern, className
     }
   };
 
-  const textVariants = {
-    hidden: { 
-      opacity: 0,
-      x: -20
-    },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.5,
-        delay: index * 0.2 + 0.3
-      }
-    },
-    hover: {
-      x: 5,
-      transition: {
-        type: 'spring',
-        stiffness: 300,
-        damping: 20
-      }
-    }
-  };
-
   return (
     <motion.div
       ref={ref}
@@ -180,18 +157,16 @@ const BentoCard = ({ icon: Icon, title, description, bgColor, pattern, className
         >
           <Icon className="w-6 h-6 text-white" />
         </motion.div>
-        <motion.h3 
+        <h3 
           className="text-2xl font-bold text-white mb-3"
-          variants={textVariants}
         >
           {title}
-        </motion.h3>
-        <motion.p 
+        </h3>
+        <p 
           className="text-white text-opacity-90 text-lg leading-relaxed flex-grow mb-8 font-medium"
-          variants={textVariants}
         >
           {description}
-        </motion.p>
+        </p>
       </div>
     </motion.div>
   );
