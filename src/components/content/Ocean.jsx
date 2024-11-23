@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import Footer from "./Footer";
 import CoralReef3D from "./OceanSpecies";
 import OceanViewer from "./MarineSuccessStories";
-import DonateEarthCTA from "./Donate";
+import EarthConservationCTA from "./Donate";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -188,7 +188,11 @@ const Ocean = () => {
             <OceanViewer />
           </motion.div>
           <div className="mb-28 w-full">
-            <DonateEarthCTA />
+            <EarthConservationCTA
+              mainBg="bg-[rgba(28,50,91,1)] border border-blue-900"
+              bgCurve1="bg-[#0A3981]"
+              bgCurve2="bg-[#1F509A]"
+            />
           </div>
         </div>
       </section>

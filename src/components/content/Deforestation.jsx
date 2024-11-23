@@ -4,7 +4,7 @@ import NasaWildfireMap from "../Wildfire";
 import { motion } from "framer-motion";
 import greenMap from "../../assets/green-map.png";
 import DetailedCarbonCalculator from "./CarbonFootprint";
-import DonateEarthCTA from "./Donate";
+import EarthConservationCTA from "./Donate";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -250,7 +250,7 @@ const Deforestation = () => {
           <DetailedCarbonCalculator />
         </div>
         <div className="mb-24 w-full">
-          <DonateEarthCTA />
+          <EarthConservationCTA />
         </div>
       </div>
 

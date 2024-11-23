@@ -11,8 +11,8 @@ import {
   Sphere,
   Graticule,
 } from "react-simple-maps";
-import DonateEarthCTA from "./Donate";
 import BeforeAfterSlider from "./ImageSlider";
+import EarthConservationCTA from "./Donate";
 
 const geoUrl = "/features.json";
 
@@ -356,7 +356,11 @@ const MapChart = () => {
         </div>
         <BeforeAfterSlider />
         <div className="w-full py-20">
-          <DonateEarthCTA />
+          <EarthConservationCTA
+            mainBg="bg-[#821131]"
+            bgCurve1="bg-[#A02334]"
+            bgCurve2="bg-[#C7253E]"
+          />
         </div>
       </section>
 
