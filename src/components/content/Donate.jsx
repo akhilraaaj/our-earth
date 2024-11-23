@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { Leaf, Globe, ArrowRight, Droplet, TreePine } from "lucide-react";
 
 const EarthConservationCTA = ({
@@ -7,12 +7,16 @@ const EarthConservationCTA = ({
   bgCurve1 = "bg-[#16423C]",
   bgCurve2 = "bg-[#145046]",
 }) => {
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true });
+
   return (
     <div className="relative flex flex-col w-full items-center justify-center text-center mt-12 px-4">
       <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
+        ref={ref}
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
         className={`flex flex-col w-full py-12 justify-center text-center items-center relative ${mainBg} rounded-3xl overflow-hidden shadow-xl`}
       >
         {/* Background Pattern */}
@@ -44,7 +48,7 @@ const EarthConservationCTA = ({
             repeat: Infinity,
             repeatType: "mirror",
           }}
-          className="absolute top-20 right-20 z-10 text-green-200/50"
+          className="absolute top-20 right-20 z-0 text-green-200/50"
         >
           <Globe size={48} />
         </motion.div>
@@ -88,7 +92,7 @@ const EarthConservationCTA = ({
             repeat: Infinity,
             repeatType: "mirror",
           }}
-          className="p-3 my-4 bg-green-800/20 rounded-full z-50 relative"
+          className="p-3 my-4 bg-green-800/20 rounded-full z-10 relative"
         >
           <Globe className="w-10 h-10 text-green-300" />
         </motion.div>
