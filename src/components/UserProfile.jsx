@@ -1,15 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  doc,
-  getDoc,
-  setDoc,
-  updateDoc,
-} from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { db, storage } from "../firebase";
-import { signOut } from 'firebase/auth';
-import { auth } from '../firebase';
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import {
   Image as ImageIcon,
@@ -20,6 +15,7 @@ import {
   Trash2,
 } from "lucide-react";
 import MyPosts from "./MyPosts";
+import Footer from "./content/Footer";
 
 const stockAvatars = [
   "https://cdn-icons-png.flaticon.com/128/4140/4140061.png",
@@ -28,7 +24,8 @@ const stockAvatars = [
   "/api/placeholder/128/128",
 ];
 
-const DEFAULT_AVATAR = "https://cdn-icons-png.flaticon.com/128/4140/4140061.png";
+const DEFAULT_AVATAR =
+  "https://cdn-icons-png.flaticon.com/128/4140/4140061.png";
 
 const UserProfile = ({ user, setUserAvatar }) => {
   const [profileData, setProfileData] = useState({
@@ -61,12 +58,12 @@ const UserProfile = ({ user, setUserAvatar }) => {
 
   const fetchUserProfile = async () => {
     if (!user?.uid) return;
-    
+
     setLoading(true);
     try {
       const userDocRef = doc(db, "users", user.uid);
       const userDocSnap = await getDoc(userDocRef);
-      
+
       if (userDocSnap.exists()) {
         const userData = userDocSnap.data();
         setProfileData({
@@ -159,11 +156,11 @@ const UserProfile = ({ user, setUserAvatar }) => {
       await updateDoc(userDocRef, updateData);
 
       // Update local state
-      setProfileData(prev => ({
+      setProfileData((prev) => ({
         ...prev,
         photoURL: imageUrl,
       }));
-      
+
       // Update parent component
       setUserAvatar(imageUrl);
 
@@ -171,7 +168,7 @@ const UserProfile = ({ user, setUserAvatar }) => {
       setCustomImage(null);
       setSelectedAvatar(null);
       setPreviewImage(null);
-      
+
       // Close modal
       setIsModalOpen(false);
     } catch (err) {
@@ -200,11 +197,11 @@ const UserProfile = ({ user, setUserAvatar }) => {
       });
 
       // Update local state
-      setProfileData(prev => ({
+      setProfileData((prev) => ({
         ...prev,
         photoURL: DEFAULT_AVATAR,
       }));
-      
+
       // Update parent component
       setUserAvatar(DEFAULT_AVATAR);
 
@@ -222,7 +219,6 @@ const UserProfile = ({ user, setUserAvatar }) => {
       setLoading(false);
     }
   };
-
 
   const modalVariants = {
     hidden: { opacity: 0, scale: 0.95 },
@@ -266,7 +262,9 @@ const UserProfile = ({ user, setUserAvatar }) => {
                 <h2 className="text-xl font-bold mb-1">
                   {profileData.displayName}
                 </h2>
-                <p className="text-gray-600 font-semibold text-md mb-2">{user.email}</p>
+                <p className="text-gray-600 font-semibold text-md mb-2">
+                  {user.email}
+                </p>
                 {profileData.bio && (
                   <p className="text-gray-700 text-md text-center mb-4">
                     {profileData.bio}
@@ -293,9 +291,12 @@ const UserProfile = ({ user, setUserAvatar }) => {
                   <Edit className="w-4 h-4" />
                   Edit Profile
                 </button>
-                <button onClick={handleSignOut} className='bg-[#00a96e] w-full flex items-center justify-center gap-2 px-4 py-2 text-white rounded-lg transition-colors'>
-                    <span className='text-white font-bold'>Log Out</span>
-                    <LogOut className="w-4 h-4" />
+                <button
+                  onClick={handleSignOut}
+                  className="bg-[#00a96e] w-full flex items-center justify-center gap-2 px-4 py-2 text-white rounded-lg transition-colors"
+                >
+                  <span className="text-white font-bold">Log Out</span>
+                  <LogOut className="w-4 h-4" />
                 </button>
               </div>
             </div>
@@ -361,22 +362,24 @@ const UserProfile = ({ user, setUserAvatar }) => {
                 <div className="p-6 space-y-6">
                   {/* Current Profile Picture */}
                   <div className="flex flex-col items-center space-y-4">
-                      <div className="relative">
-                        <img
-                          src={previewImage || profileData.photoURL || DEFAULT_AVATAR}
-                          alt="Profile Preview"
-                          className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-lg"
-                        />
-                        {profileData.photoURL !== DEFAULT_AVATAR && (
-                          <button
-                            onClick={handleRemoveProfilePicture}
-                            className="absolute -bottom-2 -right-2 p-2 bg-red-100 rounded-full hover:bg-red-200 transition-colors group"
-                            title="Remove profile picture"
-                          >
-                            <Trash2 className="w-4 h-4 text-red-600" />
-                          </button>
-                        )}
-                      </div>
+                    <div className="relative">
+                      <img
+                        src={
+                          previewImage || profileData.photoURL || DEFAULT_AVATAR
+                        }
+                        alt="Profile Preview"
+                        className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-lg"
+                      />
+                      {profileData.photoURL !== DEFAULT_AVATAR && (
+                        <button
+                          onClick={handleRemoveProfilePicture}
+                          className="absolute -bottom-2 -right-2 p-2 bg-red-100 rounded-full hover:bg-red-200 transition-colors group"
+                          title="Remove profile picture"
+                        >
+                          <Trash2 className="w-4 h-4 text-red-600" />
+                        </button>
+                      )}
+                    </div>
                   </div>
                   {/* Avatar Section */}
                   <div className="space-y-4">
@@ -555,6 +558,9 @@ const UserProfile = ({ user, setUserAvatar }) => {
             </div>
           )}
         </AnimatePresence>
+      </div>
+      <div className="mt-20">
+        <Footer bgColor="#00704A" />
       </div>
     </div>
   );

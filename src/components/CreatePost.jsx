@@ -6,6 +6,7 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { Camera, Loader2, X } from 'lucide-react';
+import Footer from './content/Footer';
 
 const CreatePost = ({ user }) => {
   const [title, setTitle] = useState('');
@@ -81,10 +82,11 @@ const CreatePost = ({ user }) => {
   };
 
   return (
+    <div>
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="min-h-screen bg-pattern overflow-x-hidden py-12 px-4 sm:px-6 lg:px-8"
+      className="min-h-screen bg-pattern overflow-x-hidden py-12 px-4 sm:px-6 lg:px-8 pb-20"
     >
       <Toaster />
       <motion.div 
@@ -230,6 +232,8 @@ const CreatePost = ({ user }) => {
         </div>
       </motion.div>
     </motion.div>
+    <Footer bgColor="#00704A" />
+  </div>
   );
 };
 
