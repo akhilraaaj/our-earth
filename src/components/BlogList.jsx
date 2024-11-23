@@ -10,7 +10,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { ChevronDown, ChevronUp, Trash, Edit, Plus } from "lucide-react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import Footer from "./content/Footer";
 
 const BlogList = ({ user, showOnlyUserPosts = false }) => {
@@ -109,7 +109,6 @@ const BlogList = ({ user, showOnlyUserPosts = false }) => {
   return (
     <div className="overflow-x-hidden min-h-screen bg-pattern">
       <div className="max-w-4xl mx-auto mt-32 p-6 ">
-        <Toaster position="top-right" />
 
         <div className="flex items-center justify-between mb-12">
           <h1 className="md:text-5xl text-4xl font-extrabold text-blue-50">
@@ -126,8 +125,8 @@ const BlogList = ({ user, showOnlyUserPosts = false }) => {
         </div>
 
         {posts.length === 0 ? (
-          <div className="text-center p-8 bg-gray-50 rounded-lg">
-            <p className="text-gray-500">
+          <div className="text-center p-8 bg-white/90 rounded-lg">
+            <p className="text-gray-800 font-semibold">
               {showOnlyUserPosts
                 ? "You haven't created any posts yet"
                 : "No posts available"}
@@ -190,10 +189,10 @@ const BlogList = ({ user, showOnlyUserPosts = false }) => {
 
                   <div className="mt-4 flex justify-between items-center">
                     <div className="flex flex-col text-sm">
-                      <span className="text-gray-500 italic">
+                      <span className="text-slate-900 font-semibold italic">
                         By {post.author}
                       </span>
-                      <span className="text-xs text-gray-400">
+                      <span className="text-xs text-slate-800 font-medium mt-2">
                         {post.updatedAt ? (
                           <>
                             Updated:{" "}
@@ -209,7 +208,7 @@ const BlogList = ({ user, showOnlyUserPosts = false }) => {
                     </div>
                     <button
                       onClick={() => toggleExpand(post.id)}
-                      className="flex items-center gap-1 text-purple-600 hover:text-purple-700 transition-colors duration-300"
+                      className="flex items-center gap-1 font-semibold text-green-800 hover:text-blue-900 transition-colors duration-300"
                     >
                       {expandedPosts[post.id] ? (
                         <>

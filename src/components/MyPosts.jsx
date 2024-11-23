@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { collection, getDocs, deleteDoc, doc, query, where } from 'firebase/firestore';
 import { db } from '../firebase';
 import { ChevronDown, ChevronUp, Trash, Edit, Plus } from 'lucide-react';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 const MyPosts = ({ user, setPostCount }) => {
   const [posts, setPosts] = useState([]);
@@ -89,8 +89,6 @@ const MyPosts = ({ user, setPostCount }) => {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <Toaster position="top-right" />
-      
       <div className="flex items-center justify-between mb-8">
         <h1 className="md:text-5xl text-4xl font-extrabold text-blue-50">
           My Posts
@@ -104,8 +102,8 @@ const MyPosts = ({ user, setPostCount }) => {
       </div>
 
       {posts.length === 0 ? (
-        <div className="text-center p-8 bg-gray-50 rounded-lg">
-          <p className="text-gray-500">You haven't created any posts yet</p>
+        <div className="text-center p-8 bg-white/90 rounded-lg">
+          <p className="text-gray-900 font-semibold">You haven't created any posts yet</p>
         </div>
       ) : (
         <div className="space-y-8">
