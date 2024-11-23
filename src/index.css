@@ -34,3 +34,16 @@ html, body, #root {
   display: flex;
   justify-content: space-between;
 }
+
+/* Disable Scrollbar */
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}

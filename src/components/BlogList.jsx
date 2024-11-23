@@ -112,7 +112,7 @@ const BlogList = ({ user, showOnlyUserPosts = false }) => {
         <Toaster position="top-right" />
 
         <div className="flex items-center justify-between mb-12">
-          <h1 className="text-5xl font-extrabold text-blue-50">
+          <h1 className="md:text-5xl text-4xl font-extrabold text-blue-50">
             {showOnlyUserPosts ? "My Posts" : "Blog Posts"}
           </h1>
           {user && (

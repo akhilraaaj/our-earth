@@ -341,15 +341,16 @@ const UserProfile = ({ user, setUserAvatar }) => {
           {isModalOpen && (
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
               <motion.div
-                className="bg-white rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+                className="bg-slate-100 rounded-3xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto no-scrollbar"
                 variants={modalVariants}
                 initial="hidden"
                 animate="visible"
                 exit="exit"
               >
+              <div className="overflow-auto scrollbar-none">
                 <div className="p-6 border-b border-gray-200">
                   <div className="flex items-center justify-between">
-                    <h2 className="text-xl font-bold">Edit Profile</h2>
+                    <h2 className="text-xl font-extrabold">Edit Profile</h2>
                     <button
                       onClick={() => setIsModalOpen(false)}
                       className="p-1 hover:bg-gray-100 rounded-full transition-colors"
@@ -383,7 +384,7 @@ const UserProfile = ({ user, setUserAvatar }) => {
                   </div>
                   {/* Avatar Section */}
                   <div className="space-y-4">
-                    <h3 className="font-semibold">Profile Picture</h3>
+                    <h3 className="text-md font-semibold">Profile Picture</h3>
                     <div className="grid grid-cols-4 gap-4">
                       {stockAvatars.map((avatar, index) => (
                         <motion.div
@@ -395,7 +396,7 @@ const UserProfile = ({ user, setUserAvatar }) => {
                           <img
                             src={avatar}
                             alt={`Avatar ${index + 1}`}
-                            className={`w-full rounded-lg border-2 ${
+                            className={`w-20 h-20 bg-white/80 rounded-full border-2 ${
                               selectedAvatar === avatar
                                 ? "border-blue-500"
                                 : "border-transparent"
@@ -430,7 +431,7 @@ const UserProfile = ({ user, setUserAvatar }) => {
                   {/* Profile Information */}
                   <div className="space-y-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <label className="block text-md font-semibold text-gray-700 mb-1">
                         Display Name
                       </label>
                       <input
@@ -442,11 +443,11 @@ const UserProfile = ({ user, setUserAvatar }) => {
                             displayName: e.target.value,
                           }))
                         }
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-800"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <label className="block text-md font-semibold text-gray-700 mb-1">
                         Bio
                       </label>
                       <textarea
@@ -457,12 +458,12 @@ const UserProfile = ({ user, setUserAvatar }) => {
                             bio: e.target.value,
                           }))
                         }
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-800"
                         rows="3"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <label className="block text-md font-semibold text-gray-700 mb-1">
                         Location
                       </label>
                       <input
@@ -474,7 +475,7 @@ const UserProfile = ({ user, setUserAvatar }) => {
                             location: e.target.value,
                           }))
                         }
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-800"
                       />
                     </div>
 
@@ -482,7 +483,7 @@ const UserProfile = ({ user, setUserAvatar }) => {
                     {Object.entries(profileData.social).map(
                       ([platform, value]) => (
                         <div key={platform}>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                          <label className="block text-md font-semibold text-gray-700 mb-1">
                             {platform.charAt(0).toUpperCase() +
                               platform.slice(1)}
                           </label>
@@ -498,7 +499,7 @@ const UserProfile = ({ user, setUserAvatar }) => {
                                 },
                               }))
                             }
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-800"
                             placeholder={`Enter your ${platform} ${
                               platform === "twitter"
                                 ? "username"
@@ -528,7 +529,7 @@ const UserProfile = ({ user, setUserAvatar }) => {
                       setIsModalOpen(false);
                       fetchUserProfile();
                     }}
-                    className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+                    className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 font-semibold hover:bg-gray-50 transition-colors"
                   >
                     Cancel
                   </button>
@@ -538,21 +539,22 @@ const UserProfile = ({ user, setUserAvatar }) => {
                       setIsModalOpen(false);
                     }}
                     disabled={loading}
-                    className={`px-4 py-2 rounded-lg text-white transition-colors ${
+                    className={`px-4 py-2 rounded-lg text-white font-semibold transition-colors ${
                       loading
-                        ? "bg-blue-400 cursor-not-allowed"
-                        : "bg-blue-600 hover:bg-blue-700"
+                        ? "bg-slate-800 cursor-not-allowed"
+                        : "bg-slate-800 hover:bg-slate-700"
                     }`}
                   >
                     {loading ? (
-                      <div className="flex items-center">
+                      <div className="flex items-center gap-2">
+                        Saving
                         <Loader className="w-4 h-4 mr-2 animate-spin" />
-                        Saving...
                       </div>
                     ) : (
                       "Save Changes"
                     )}
                   </button>
+                </div>
                 </div>
               </motion.div>
             </div>
