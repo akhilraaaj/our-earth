@@ -1,8 +1,8 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { Leaf, Droplets, Recycle, Bird, Car, Sun } from 'lucide-react';
 
-// Background patterns remain the same
+// Background patterns remain unchanged...
 const BackgroundPatterns = {
   circular: (
     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -60,22 +60,58 @@ const BackgroundPatterns = {
   )
 };
 
-const BentoCard = ({ icon: Icon, title, description, bgColor, pattern, className }) => {
+const BentoCard = ({ icon: Icon, title, description, bgColor, pattern, className, index }) => {
+  const ref = React.useRef(null);
+  // Removed 'once: true' to make animations repeat
+  const isInView = useInView(ref, { margin: "-100px" });
+  const [isPressed, setIsPressed] = React.useState(false);
+
   const cardVariants = {
-    initial: {
+    hidden: { 
+      opacity: 0,
+      y: 50,
+      scale: 0.9
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
       scale: 1,
-      boxShadow: '0 0 0 rgba(0,0,0,0)'
+      transition: {
+        duration: 0.5,
+        delay: index * 0.2,
+        ease: "easeOut"
+      }
     },
     hover: {
-      scale: 1.03,
-      boxShadow: '0 10px 30px rgba(0,0,0,0.2)'
+      boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
+      transition: {
+        type: 'spring',
+        stiffness: 300,
+        damping: 20
+      }
+    },
+    tap: {
+      scale: 0.98,
+      brightness: 1.1
     }
   };
 
   const iconContainerVariants = {
-    initial: {
+    hidden: { 
+      rotate: -180,
+      scale: 0.5,
+      opacity: 0
+    },
+    visible: {
       rotate: 0,
-      scale: 1
+      scale: 1,
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        delay: index * 0.2 + 0.2,
+        type: 'spring',
+        stiffness: 200
+      }
     },
     hover: {
       rotate: 360,
@@ -85,25 +121,58 @@ const BentoCard = ({ icon: Icon, title, description, bgColor, pattern, className
         stiffness: 300,
         damping: 15
       }
+    },
+    tap: {
+      scale: 0.9,
+      rotate: -45,
+    }
+  };
+
+  const textVariants = {
+    hidden: { 
+      opacity: 0,
+      x: -20
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.5,
+        delay: index * 0.2 + 0.3
+      }
+    },
+    hover: {
+      x: 5,
+      transition: {
+        type: 'spring',
+        stiffness: 300,
+        damping: 20
+      }
     }
   };
 
   return (
     <motion.div
-      className={`relative p-6 rounded-xl h-full flex flex-col overflow-hidden backdrop-blur-sm ${className}`}
+      ref={ref}
+      className={`relative p-6 rounded-xl h-full flex flex-col overflow-hidden backdrop-blur-sm ${className} cursor-pointer`}
       style={{ backgroundColor: bgColor }}
-      initial="initial"
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
       whileHover="hover"
+      whileTap="tap"
       variants={cardVariants}
-      transition={{ 
-        type: 'spring',
-        stiffness: 300,
-        damping: 20
-      }}
+      onPointerDown={() => setIsPressed(true)}
+      onPointerUp={() => setIsPressed(false)}
+      onPointerLeave={() => setIsPressed(false)}
     >
-      <div className="absolute inset-0 opacity-80">
+      <motion.div
+        className="absolute inset-0 opacity-80"
+        animate={{
+          opacity: isPressed ? 0.9 : 0.8,
+        }}
+      >
         {pattern}
-      </div>
+      </motion.div>
       <div className="relative z-10">
         <motion.div
           className="w-12 h-12 mb-4 flex items-center justify-center bg-white bg-opacity-20 rounded-lg"
@@ -113,27 +182,39 @@ const BentoCard = ({ icon: Icon, title, description, bgColor, pattern, className
         </motion.div>
         <motion.h3 
           className="text-2xl font-bold text-white mb-3"
+          variants={textVariants}
         >
           {title}
         </motion.h3>
-        <p className="text-white text-opacity-90 text-lg leading-relaxed flex-grow mb-8 font-medium">
+        <motion.p 
+          className="text-white text-opacity-90 text-lg leading-relaxed flex-grow mb-8 font-medium"
+          variants={textVariants}
+        >
           {description}
-        </p>
+        </motion.p>
       </div>
     </motion.div>
   );
 };
 
 const SectionCardGrid = () => {
+  const headerRef = React.useRef(null);
+  const headerInView = useInView(headerRef, { margin: "-100px" });
+
   return (
-    <div className="container mx-auto py-12">
-      <div className="inline-block px-3 py-2 mb-6 text-sm font-semibold text-white rounded-lg text-cn bg-blue-900 hover:cursor-pointer hover:bg-opacity-90">
-          Eco-Friendly Choices
-      </div>
+    <div className="container mx-auto py-12" ref={headerRef}>
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={headerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+        transition={{ duration: 0.5 }}
+        className="inline-block px-3 py-2 mb-6 text-sm font-semibold text-white rounded-lg text-cn bg-blue-900 hover:cursor-pointer hover:bg-opacity-90"
+      >
+        Eco-Friendly Choices
+      </motion.div>
       <motion.h1
         className="text-5xl font-bold text-center mb-8 text-green-800"
         initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
+        animate={headerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
       >
         Nurturing Our Planet
@@ -141,17 +222,12 @@ const SectionCardGrid = () => {
       <motion.p
         className="text-2xl text-center mb-16 text-green-700 font-semibold"
         initial={{ opacity: 0, y: -30 }}
-        animate={{ opacity: 1, y: 0 }}
+        animate={headerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -30 }}
         transition={{ duration: 0.7, delay: 0.2 }}
       >
         Sustainable Actions for a Thriving Earth
       </motion.p>
-      <motion.div
-        className="grid gap-8"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.7, delay: 0.4 }}
-      >
+      <motion.div className="grid gap-8">
         <div className="flex flex-col lg:flex-row gap-8">
           <div className="w-full lg:w-7/12 lg:h-[320px] h-fit">
             <BentoCard
@@ -160,6 +236,7 @@ const SectionCardGrid = () => {
               description="Embrace the cycle of sustainability: Reduce consumption, Reuse creatively, and Recycle responsibly. Transform waste into resources and minimize our ecological footprint."
               bgColor="rgba(47, 133, 90, 0.95)"
               pattern={BackgroundPatterns.circular}
+              index={0}
             />
           </div>
           <div className="w-full lg:w-5/12 lg:h-[320px] h-fit">
@@ -169,6 +246,7 @@ const SectionCardGrid = () => {
               description="Cherish every drop: Implement water-saving techniques, harvest rainwater, and protect our precious aquatic ecosystems."
               bgColor="rgba(49, 130, 206, 0.95)"
               pattern={BackgroundPatterns.waves}
+              index={1}
             />
           </div>
         </div>
@@ -180,6 +258,7 @@ const SectionCardGrid = () => {
               description="Safeguard nature's delicate balance: Support wildlife conservation, create habitat corridors, and champion sustainable practices that protect our planet's rich biodiversity."
               bgColor="rgba(123, 52, 30, 0.95)"
               pattern={BackgroundPatterns.leaves}
+              index={2}
             />
           </div>
           <div className="w-full lg:w-7/12 lg:h-[320px] h-fit">
@@ -189,6 +268,7 @@ const SectionCardGrid = () => {
               description="Redefine your journey: Embrace eco-friendly transportation, from electric vehicles to active commuting. Every sustainable mile contributes to cleaner air and a healthier planet."
               bgColor="#508D4E"
               pattern={BackgroundPatterns.grid}
+              index={3}
             />
           </div>
         </div>
@@ -200,6 +280,7 @@ const SectionCardGrid = () => {
               description="Harness nature's power: Advocate for and adopt renewable energy sources. Be part of the global shift towards a sustainable, clean energy landscape that nurtures our planet."
               bgColor="rgba(44, 122, 123, 0.95)"
               pattern={BackgroundPatterns.dots}
+              index={4}
             />
           </div>
           <div className="w-full lg:w-5/12 lg:h-[320px] h-fit">
@@ -209,6 +290,7 @@ const SectionCardGrid = () => {
               description="Cultivate a green lifestyle: From sustainable shopping to community gardens, infuse every aspect of life with eco-friendly choices that ripple out to create positive environmental change."
               bgColor="rgba(76, 81, 191, 0.95)"
               pattern={BackgroundPatterns.hexagons}
+              index={5}
             />
           </div>
         </div>
