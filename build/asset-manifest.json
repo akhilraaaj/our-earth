@@ -1,8 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.b18950c2.css",
-    "main.js": "/static/js/main.55411342.js",
-    "static/js/27.a027942a.chunk.js": "/static/js/27.a027942a.chunk.js",
+    "main.css": "/static/css/main.f23218c0.css",
+    "main.js": "/static/js/main.82cd158a.js",
     "static/media/8k_earth_clouds.jpg": "/static/media/8k_earth_clouds.08fcd80007fae8fc7170.jpg",
     "static/media/8k_earth_daymap.jpg": "/static/media/8k_earth_daymap.54672c1f3ba121d80470.jpg",
     "static/media/8k_earth_specular_map.jpg": "/static/media/8k_earth_specular_map.7b4efa59933b470e3776.jpg",
@@ -10,7 +9,7 @@
     "index.html": "/index.html"
   },
   "entrypoints": [
-    "static/css/main.b18950c2.css",
-    "static/js/main.55411342.js"
+    "static/css/main.f23218c0.css",
+    "static/js/main.82cd158a.js"
   ]
 }
