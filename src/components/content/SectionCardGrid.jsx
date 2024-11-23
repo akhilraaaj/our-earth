@@ -62,8 +62,7 @@ const BackgroundPatterns = {
 
 const BentoCard = ({ icon: Icon, title, description, bgColor, pattern, className, index }) => {
   const ref = React.useRef(null);
-  // Removed 'once: true' to make animations repeat
-  const isInView = useInView(ref, { margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [isPressed, setIsPressed] = React.useState(false);
 
   const cardVariants = {
@@ -97,22 +96,7 @@ const BentoCard = ({ icon: Icon, title, description, bgColor, pattern, className
   };
 
   const iconContainerVariants = {
-    hidden: { 
-      rotate: -180,
-      scale: 0.5,
-      opacity: 0
-    },
-    visible: {
-      rotate: 0,
-      scale: 1,
-      opacity: 1,
-      transition: {
-        duration: 0.5,
-        delay: index * 0.2 + 0.2,
-        type: 'spring',
-        stiffness: 200
-      }
-    },
+    initial: { rotate: 0, scale: 1 },
     hover: {
       rotate: 360,
       scale: 1.1,
@@ -128,11 +112,26 @@ const BentoCard = ({ icon: Icon, title, description, bgColor, pattern, className
     }
   };
 
+  const textVariants = {
+    hover: {
+      x: 5,
+      transition: {
+        type: 'spring',
+        stiffness: 300,
+        damping: 20
+      }
+    }
+  };
+
   return (
     <motion.div
       ref={ref}
       className={`relative p-6 rounded-xl h-full flex flex-col overflow-hidden backdrop-blur-sm ${className} cursor-pointer`}
-      style={{ backgroundColor: bgColor }}
+      style={{ 
+        backgroundColor: bgColor,
+        transform: isInView ? "none" : "translateY(100px)",
+        opacity: isInView ? 1 : 0,
+      }}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       whileHover="hover"
@@ -157,30 +156,29 @@ const BentoCard = ({ icon: Icon, title, description, bgColor, pattern, className
         >
           <Icon className="w-6 h-6 text-white" />
         </motion.div>
-        <h3 
+        <motion.h3 
           className="text-2xl font-bold text-white mb-3"
+          variants={textVariants}
         >
           {title}
-        </h3>
-        <p 
+        </motion.h3>
+        <motion.p 
           className="text-white text-opacity-90 text-lg leading-relaxed flex-grow mb-8 font-medium"
+          variants={textVariants}
         >
           {description}
-        </p>
+        </motion.p>
       </div>
     </motion.div>
   );
 };
 
 const SectionCardGrid = () => {
-  const headerRef = React.useRef(null);
-  const headerInView = useInView(headerRef, { margin: "-100px" });
-
   return (
-    <div className="container mx-auto py-12" ref={headerRef}>
+    <div className="container mx-auto py-12">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
-        animate={headerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className="inline-block px-3 py-2 mb-6 text-sm font-semibold text-white rounded-lg text-cn bg-blue-900 hover:cursor-pointer hover:bg-opacity-90"
       >
@@ -189,7 +187,7 @@ const SectionCardGrid = () => {
       <motion.h1
         className="text-5xl font-bold text-center mb-8 text-green-800"
         initial={{ opacity: 0, y: -50 }}
-        animate={headerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
       >
         Nurturing Our Planet
@@ -197,7 +195,7 @@ const SectionCardGrid = () => {
       <motion.p
         className="text-2xl text-center mb-16 text-green-700 font-semibold"
         initial={{ opacity: 0, y: -30 }}
-        animate={headerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.2 }}
       >
         Sustainable Actions for a Thriving Earth
