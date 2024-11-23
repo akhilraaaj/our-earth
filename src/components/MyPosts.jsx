@@ -92,11 +92,11 @@ const MyPosts = ({ user, setPostCount }) => {
       <Toaster position="top-right" />
       
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-4xl font-bold text-green-800">
+        <h1 className="text-5xl font-extrabold text-blue-50">
           My Posts
         </h1>
         <Link to="/home/create-post">
-          <button className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white px-4 py-2 rounded-lg hover:opacity-90 transition-all duration-300 transform hover:scale-105">
+          <button className="flex items-center gap-2 bg-slate-800 text-white px-4 py-2 rounded-lg hover:opacity-90 transition-all duration-300 transform hover:scale-105">
             <Plus size={20} />
             Add Post
           </button>
@@ -112,7 +112,7 @@ const MyPosts = ({ user, setPostCount }) => {
           {posts.map(post => (
             <div 
               key={post.id}
-              className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl"
+              className="bg-white/90 rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl"
             >
               <div className="p-6">
                 <div className="flex justify-between items-start mb-4">
@@ -150,7 +150,7 @@ const MyPosts = ({ user, setPostCount }) => {
                 }`}>
                   <p className="text-gray-700 leading-relaxed">{post.content}</p>
                   {!expandedPosts[post.id] && (
-                    <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-white to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 h-12" />
                   )}
                 </div>
 

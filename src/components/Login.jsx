@@ -102,7 +102,7 @@ export const Login = ({ user }) => {
   } 
 
   return (
-    <div className="min-h-screen flex justify-center items-center login">
+    <div className="min-h-screen flex justify-center items-center bg-pattern">
       <div className="bg-white px-6 py-12 rounded-2xl shadow-xl border md:w-1/3 ">
         <h2 className="text-4xl font-extrabold mb-8 text-center text-green-800">OUR EARTH 🌍</h2>
         <form onSubmit={handleSubmit}>

@@ -11,8 +11,8 @@ html, body, #root {
   padding: 0;
 }
 
-.login {
-  background-image: url("/public/Sprinkle.svg");
+.bg-pattern {
+  background-image: url("/public/images/bg-pattern.svg");
   background-size: cover;
   background-position: center;
   width: 100%;

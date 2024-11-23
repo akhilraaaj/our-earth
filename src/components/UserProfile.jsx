@@ -239,7 +239,7 @@ const UserProfile = ({ user, setUserAvatar }) => {
   };
 
   return (
-    <div className="overflow-x-hidden w-full login">
+    <div className="overflow-x-hidden w-full bg-pattern">
       <div className="max-w-7xl mx-auto px-4 py-8 mt-20">
         <div className="grid grid-cols-12 gap-6">
           {/* Left Sidebar - Dashboard */}
@@ -250,7 +250,7 @@ const UserProfile = ({ user, setUserAvatar }) => {
             transition={{ duration: 0.5 }}
           >
             {/* Profile Card */}
-            <div className="bg-white rounded-lg shadow-lg p-6">
+            <div className="bg-white/90 rounded-lg shadow-lg p-6">
               <div className="flex flex-col items-center">
                 <div className="relative w-32 h-32 mb-4">
                   <img
@@ -288,7 +288,7 @@ const UserProfile = ({ user, setUserAvatar }) => {
               <div className="flex flex-col gap-4">
                 <button
                   onClick={() => setIsModalOpen(true)}
-                  className="w-full mt-4 flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  className="w-full mt-4 flex items-center justify-center gap-2 px-4 py-2 bg-slate-800 text-white rounded-lg hover:bg-blue-700 transition-colors"
                 >
                   <Edit className="w-4 h-4" />
                   Edit Profile
@@ -302,7 +302,7 @@ const UserProfile = ({ user, setUserAvatar }) => {
 
             {/* Social Links */}
             {Object.entries(profileData.social).some(([_, value]) => value) && (
-              <div className="bg-white rounded-lg shadow-lg p-6">
+              <div className="bg-white/90 rounded-lg shadow-lg p-6">
                 <h3 className="font-semibold mb-4">Social Links</h3>
                 <div className="space-y-3">
                   {Object.entries(profileData.social).map(
