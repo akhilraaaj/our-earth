@@ -4,7 +4,7 @@ import { Bars3BottomRightIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import { LogOut, Layout } from "lucide-react";
-import user1 from '/our-earth/src/assets/avatars/male-1.svg';
+import user1 from '../assets/avatars/male-1.svg';
 
 function Navbar({ user, email, userAvatar }) {
   let Links = [

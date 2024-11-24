@@ -16,10 +16,10 @@ import {
 } from "lucide-react";
 import MyPosts from "../blog/MyPosts";
 import Footer from "../Footer";
-import user1 from '/our-earth/src/assets/avatars/male-1.svg';
-import user2 from '/our-earth/src/assets/avatars/male-2.svg';
-import user3 from '/our-earth/src/assets/avatars/female-1.svg';
-import user4 from '/our-earth/src/assets/avatars/female-2.svg';
+import user1 from '../../assets/avatars/male-1.svg';
+import user2 from '../../assets/avatars/male-2.svg';
+import user3 from '../../assets/avatars/female-1.svg';
+import user4 from '../../assets/avatars/female-2.svg';
 
 
 const stockAvatars = [

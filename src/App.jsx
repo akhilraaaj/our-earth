@@ -4,7 +4,7 @@ import { auth, db } from './firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
 import { Login } from './components/auth/Login';
-import TopSection from './components/Home';
+import Home from './components/Home';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AnimatePresence } from 'framer-motion';
 import Landing from "./components/Landing";
@@ -53,7 +53,7 @@ function App() {
       <AnimatePresence>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<TopSection user={user} />} />
+            <Route path="/" element={<Home user={user} />} />
             <Route path="/login" element={<Login user={user} />} />
             <Route path="*" element={<Page404 />} />
             <Route path="/home/*" element={

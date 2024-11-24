@@ -26,8 +26,8 @@ export function Earth(props) {
 
   return (
     <>
-      <ambientLight intensity={0.1} />
-      <pointLight position={[2, 0, 5]} intensity={1.2} />
+      <ambientLight intensity={0.7} />
+      <pointLight position={[2, 0, 5]} intensity={5} />
       <Stars
         radius={300}
         depth={60}
