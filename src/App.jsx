@@ -18,6 +18,9 @@ import BlogList from './components/blog/BlogList';
 import CreatePost from './components/blog/CreatePost';
 import EditPost from './components/blog/EditPost';
 import UserProfile from './components/content/UserProfile';
+import user1 from './assets/avatars/male-1.svg';
+
+const DEFAULT_AVATAR = user1;
 
 function App() {
   const [user, setUser] = useState(null);
@@ -25,24 +28,43 @@ function App() {
   const [isFetching, setIsFetching] = useState(true);
   const [userAvatar, setUserAvatar] = useState('');
 
+  const fetchUserAvatar = async (userId) => {
+    try {
+      const userDoc = await getDoc(doc(db, "users", userId));
+      if (userDoc.exists()) {
+        const profilePic = userDoc.data().profilePic;
+        if (profilePic) {
+          setUserAvatar(profilePic);
+        } else {
+          setUserAvatar(DEFAULT_AVATAR);
+        }
+      } else {
+        setUserAvatar(DEFAULT_AVATAR);
+      }
+    } catch (error) {
+      console.error("Error fetching user avatar:", error);
+      setUserAvatar(DEFAULT_AVATAR);
+    }
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setUser(user);
       if (user) {
         setEmail(user.email);
-        try {
-          const userDoc = await getDoc(doc(db, "users", user.uid));
-          if (userDoc.exists() && userDoc.data().profilePic) {
-            setUserAvatar(userDoc.data().profilePic);
-          }
-        } catch (error) {
-          console.error("Error fetching initial avatar:", error);
-        }
+        await fetchUserAvatar(user.uid);
+      } else {
+        setUserAvatar(DEFAULT_AVATAR);
       }
       setIsFetching(false);
     });
+
     return () => unsubscribe();
   }, []);
+
+  const handleUpdateUserAvatar = async (newAvatar) => {
+    setUserAvatar(newAvatar);
+  };
 
   if (isFetching) {
     return <Loading />;
@@ -58,7 +80,7 @@ function App() {
             <Route path="*" element={<Page404 />} />
             <Route path="/home/*" element={
               <ProtectedRoute user={user}>
-                <Navbar user={user} email={email} userAvatar={userAvatar} />
+                <Navbar user={user} email={email} userAvatar={userAvatar || DEFAULT_AVATAR} />
                 <Routes>
                   <Route path="/" element={<Landing />} />
                   <Route path="/climate-change" element={<Climate />} />
@@ -67,7 +89,7 @@ function App() {
                   <Route path="/blog" element={<BlogList user={user} />} />
                   <Route path="/create-post" element={<CreatePost user={user} />} />
                   <Route path="/edit/:id" element={<EditPost user={user} />} />
-                  <Route path="/dashboard" element={<UserProfile user={user} setUserAvatar={setUserAvatar} />} />
+                  <Route path="/dashboard" element={<UserProfile user={user} setUserAvatar={handleUpdateUserAvatar} currentAvatar={userAvatar}  />} />
                   <Route path="*" element={<Page404 />} />
                 </Routes>
               </ProtectedRoute>

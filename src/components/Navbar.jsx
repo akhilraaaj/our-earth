@@ -6,6 +6,8 @@ import { auth } from "../firebase";
 import { LogOut, Layout } from "lucide-react";
 import user1 from '../assets/avatars/male-1.svg';
 
+const DEFAULT_AVATAR = user1;
+
 function Navbar({ user, email, userAvatar }) {
   let Links = [
     { name: "PLANT TREES", link: "/home/plant-trees" },
@@ -87,10 +89,14 @@ function Navbar({ user, email, userAvatar }) {
                       src={userAvatar}
                       alt="Profile"
                       className="w-12 rounded-full object-cover"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = DEFAULT_AVATAR;
+                      }}
                     />
                   ) : (
                     <img
-                      src={user1}
+                      src={DEFAULT_AVATAR}
                       alt="Profile"
                       className="w-12 rounded-full object-cover"
                     />
