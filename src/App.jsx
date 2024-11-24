@@ -9,7 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AnimatePresence } from 'framer-motion';
 import Landing from "./components/Landing";
 import Climate from './components/content/Climate';
-import Deforestation from './components/content/PlantTrees';
+import PlantTrees from './components/content/PlantTrees';
 import Ocean from './components/content/Ocean';
 import Page404 from './components/Page404';
 import Navbar from './components/Navbar';
@@ -61,9 +61,9 @@ function App() {
                 <Navbar user={user} email={email} userAvatar={userAvatar} />
                 <Routes>
                   <Route path="/" element={<Landing />} />
-                  <Route path="/Climate" element={<Climate />} />
-                  <Route path="/Deforestation" element={<Deforestation />} />
-                  <Route path="/Ocean" element={<Ocean />} />
+                  <Route path="/climate-change" element={<Climate />} />
+                  <Route path="/plant-trees" element={<PlantTrees />} />
+                  <Route path="/save-the-ocean" element={<Ocean />} />
                   <Route path="/blog" element={<BlogList user={user} />} />
                   <Route path="/create-post" element={<CreatePost user={user} />} />
                   <Route path="/edit/:id" element={<EditPost user={user} />} />

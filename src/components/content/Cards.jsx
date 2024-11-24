@@ -81,7 +81,7 @@ const Cards = () => {
                 </p>
                 <div className="card-actions justify-end">
                   <Link
-                    to="/home/deforestation"
+                    to="/home/plant-trees"
                     className="flex w-full items-center justify-center"
                   >
                     <CustomButton />
@@ -116,7 +116,7 @@ const Cards = () => {
                 </p>
                 <div className="card-actions justify-end">
                   <Link
-                    to="/home/climate"
+                    to="/home/climate-change"
                     className="flex w-full items-center justify-center"
                   >
                     <CustomButton />
@@ -151,7 +151,7 @@ const Cards = () => {
                 </p>
                 <div className="card-actions justify-end">
                   <Link
-                    to="/home/ocean"
+                    to="/home/save-the-ocean"
                     className="flex w-full items-center justify-center"
                   >
                     <CustomButton />

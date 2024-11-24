@@ -8,9 +8,9 @@ import user1 from '../assets/avatars/male-1.svg';
 
 function Navbar({ user, email, userAvatar }) {
   let Links = [
-    { name: "PLANT TREES", link: "/home/deforestation" },
-    { name: "CLIMATE CHANGE", link: "/home/climate" },
-    { name: "SAVE THE OCEAN", link: "/home/ocean" },
+    { name: "PLANT TREES", link: "/home/plant-trees" },
+    { name: "CLIMATE CHANGE", link: "/home/climate-change" },
+    { name: "SAVE THE OCEAN", link: "/home/save-the-ocean" },
     { name: "BLOG", link: "/home/blog" },
   ];
 
