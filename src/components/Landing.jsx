@@ -7,7 +7,7 @@ import Section  from './content/Section';
 
 const Landing = () => {
   return (
-    <div className='w-full h-screen' style={{ overflowY: 'auto'}}>
+    <div className='w-full h-screen'>
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
         <Home />
         <div id="cards-section">
