@@ -16,6 +16,8 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "ajv": "^8.17.1",
+    "ajv-keywords": "^5.1.0",
     "animate.css": "^4.1.1",
     "canvas-confetti": "^1.9.3",
     "d3": "^7.8.5",
@@ -30,13 +32,13 @@
     "react-icons": "^4.12.0",
     "react-leaflet": "^4.2.1",
     "react-router-dom": "^6.14.1",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
     "react-select": "^5.7.4",
     "react-simple-maps": "^3.0.0",
     "react-spring": "^9.7.2",
     "recharts": "^2.13.3",
     "swiper": "^11.1.14",
-    "three": "^0.154.0",
+    "three": "^0.170.0",
     "topojson": "^3.0.2",
     "web-vitals": "^2.1.4"
   },
@@ -68,6 +70,7 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "cross-env": "^7.0.3",
     "daisyui": "^4.10.1",
-    "tailwindcss": "^3.4.3"
+    "tailwindcss": "^3.4.3",
+    "typescript": "^4.9.5"
   }
 }
