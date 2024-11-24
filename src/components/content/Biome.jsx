@@ -1,6 +1,6 @@
 import { useAnimate } from "framer-motion";
 import React, { useRef } from "react";
-import Arrow from '/our-earth/src/assets/arrow.webp'
+import Arrow from '../../assets/arrow.webp'
 
 export const Biome = () => {
   return (
