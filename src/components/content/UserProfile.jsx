@@ -29,9 +29,9 @@ const stockAvatars = [
 const DEFAULT_AVATAR =
   user1;
 
-const UserProfile = ({ user, setUserAvatar }) => {
+const UserProfile = ({ user, setUserAvatar, currentAvatar }) => {
   const [profileData, setProfileData] = useState({
-    photoURL: user?.photoURL || DEFAULT_AVATAR,
+    photoURL: currentAvatar || DEFAULT_AVATAR,
     displayName: user?.displayName || "",
     bio: "",
     location: "",
