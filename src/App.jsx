@@ -19,6 +19,7 @@ import CreatePost from './components/blog/CreatePost';
 import EditPost from './components/blog/EditPost';
 import UserProfile from './components/content/UserProfile';
 import user1 from './assets/avatars/male-1.svg';
+import ScrollToTop from './components/ScrollToTop';
 
 const DEFAULT_AVATAR = user1;
 
@@ -74,6 +75,7 @@ function App() {
     <div className='w-full h-full m-0 p-0'>
       <AnimatePresence>
         <BrowserRouter>
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Home user={user} />} />
             <Route path="/login" element={<Login user={user} />} />

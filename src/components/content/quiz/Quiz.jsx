@@ -239,9 +239,9 @@ const QuizForm = () => {
                   className="mb-6 rounded-xl overflow-hidden"
                 >
                   <img
-                    src="https://optimise2.assets-servd.host/nice-serious/production/images/ikea-marvellous-middle-10.png?w=1280&q=100&auto=format&fit=crop&dm=1659446362&s=85ce5df0d755711d8a5e16ee05cc38cd"
+                    src="https://parade.com/.image/ar_4:3%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTkwNTgwOTkzMTkxOTEyNTcz/earth-day-trivia-jpg.jpg"
                     alt="Question illustration"
-                    className="w-full h-80 object-cover object-center -mb-32"
+                    className="w-full h-80 object-cover object-top -mb-32 rotate-180"
                   />
                   
                 </motion.div>
